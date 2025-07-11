@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ארגנטינה: מפת הדרכים לצמיחה | ניתוח מורחב של דוח OECD 2025</title>
     
-    <!-- Strategy Brief (Revised for Light Theme) -->
+    <!-- Strategy Brief (Revised for Light Theme & Stability) -->
     <!--
-        נתיב נבחר: אינפוגרפיקה אינטראקטיבית בדף יחיד (SPA כפלט HTML) - גרסה בהירה וקריאה.
+        נתיב נבחר: אינפוגרפיקה אינטראקטיבית בדף יחיד (SPA כפלט HTML) - גרסה מתוקנת ויציבה.
         תזת ליבה: ארגנטינה נמצאת בנקודת מפנה קריטית. לאחר שנים של חוסר יציבות, רפורמות כלכליות שאפתניות (בראשן ריסון פיסקלי חסר תקדים) מתחילות לייצב את הכלכלה, להוריד את האינפלציה ולהניע התאוששות. עם זאת, כדי להבטיח צמיחה בת-קיימא ולממש את הפוטנציאל העצום שלה (במיוחד במעבר האנרגיה העולמי), על ארגנטינה להתמודד עם ארבעה אתגרים מבניים עמוקים: (1) כלכלה לא-פורמלית נרחבת, (2) חסמים לתחרות וסחר, (3) תשתיות וסביבה עסקית מורכבת, ו-(4) מיצוי הזדמנויות במעבר האנרגיה.
         
-        אסטרטגיה נרטיבית:
-        - מטרה: שכנוע (Persuasive) ומידע עמוק (In-depth Informative) עם דגש על בהירות ונגישות.
-        - ארכיטיפ: "ממפה הדרכים" (The Cartographer) - מציג מפה מפורטת וברורה של השטח הכלכלי.
-        - נרטיב מרכזי: "מעבר לייצוב הראשוני, הצלחתה העתידית של ארגנטינה תלויה בביצוע סימולטני של ארבע רפורמות מבניות. דוח זה הוא מפת הדרכים המפורטת לביצוען."
-        - מסגרת חשיבה: לוגוס (Logos) - ניתוח מבוסס נתונים ועובדות.
-
         אסטרטגיה ויזואלית (מתוקנת):
         - סגנון ויזואלי: "הסגנון השוויצרי/בינלאומי" - נקי, מבוסס גריד, אובייקטיבי, עם דגש על קריאות ובהירות. שימוש בחלל לבן, היררכיה טיפוגרפית ברורה וצבעוניות מתונה עם הדגשות חזקות.
-        - קונספט פריסה: אינפוגרפיקה נגללת מורחבת, מחולקת למקטעים ברורים עם הפרדה ויזואלית מרווחת.
         - פלטת צבעים (ערכת נושא בהירה):
             - רקע_ראשי: #F9FAFB (אפור בהיר מאוד)
             - רקע_משני: #FFFFFF (לבן)
@@ -28,7 +21,6 @@
             - הדגשה_אתגר: #D97706 (ענבר)
             - הדגשה_ניטרלית: #2563EB (כחול)
             - גבול_מפריד: #E5E7EB (אפור בהיר)
-        - מדדי הצלחה: העברת קהל היעד מהבנת הבעיה להבנת הפתרון המורכב, ומתן מסגרת ברורה לקבלת החלטות מדיניות, באופן נגיש ונעים לקריאה.
     -->
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,14 +35,15 @@
     <style>
         body { font-family: 'Assistant', sans-serif; background-color: #F9FAFB; color: #111827; overflow-x: hidden; }
         .chart-container { position: relative; margin: auto; height: 35vh; width: 100%; max-width: 500px; }
-        .section-card { background-color: #FFFFFF; border: 1px solid #E5E7EB; opacity: 0; transform: translateY(50px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .section-card { background-color: #FFFFFF; border: 1px solid #E5E7EB; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
         .pillar-card { background-color: #F9FAFB; border: 1px solid #E5E7EB; }
         .highlight-green { color: #059669; }
         .highlight-amber { color: #D97706; }
         .highlight-blue { color: #2563EB; }
         .recommendation-list li { padding-right: 1.75rem; position: relative; }
         .recommendation-list li::before { content: '✓'; color: #059669; position: absolute; right: 0; top: 2px; font-weight: bold; font-size: 1.1rem; }
-        .gsap-reveal { opacity: 0; transform: translateY(30px); }
+        /* This class is now only a marker for GSAP, it doesn't hide content by default */
+        .gsap-reveal { opacity: 1; }
     </style>
 </head>
 <body class="antialiased">
@@ -64,12 +57,12 @@
         </header>
 
         <!-- Section 1: The Turning Point -->
-        <section class="section-card rounded-2xl p-6 md:p-10 mb-16">
-            <div class="text-center mb-10 gsap-reveal">
+        <section class="section-card rounded-2xl p-6 md:p-10 mb-16 gsap-reveal">
+            <div class="text-center mb-10">
                 <h2 class="text-3xl md:text-4xl font-bold highlight-blue">פרק 1: נקודת המפנה המקרו-כלכלית</h2>
                 <p class="text-gray-600 mt-2 max-w-3xl mx-auto">מהלך ריסון פיסקלי חסר תקדים עצר את הדפסת הכסף, בלם את האינפלציה הדוהרת ויצר את הבסיס להתאוששות הכלכלה.</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center gsap-reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div class="chart-container">
                     <h3 class="text-center font-bold text-lg mb-2 text-gray-800">המהפך הפיסקלי (% תמ"ג)</h3>
                     <canvas id="fiscalChart"></canvas>
@@ -79,7 +72,7 @@
                     <canvas id="inflationChart"></canvas>
                 </div>
             </div>
-            <div class="mt-12 gsap-reveal">
+            <div class="mt-12">
                 <h3 class="font-bold text-xl mb-4 text-center text-gray-800">ממצאים ותובנות מפתח</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
@@ -95,8 +88,8 @@
         </section>
 
         <!-- Section 2: The Four Pillars -->
-        <section class="section-card rounded-2xl p-6 md:p-10 mb-16">
-            <div class="text-center mb-10 gsap-reveal">
+        <section class="section-card rounded-2xl p-6 md:p-10 mb-16 gsap-reveal">
+            <div class="text-center mb-10">
                 <h2 class="text-3xl md:text-4xl font-bold highlight-blue">פרק 2: ארבעת עמודי התווך לרפורמה מבנית</h2>
                 <p class="text-gray-600 mt-2 max-w-3xl mx-auto">הצלחה ארוכת טווח תלויה בהתמודדות עם אתגרי שורש עמוקים בארבע חזיתות מרכזיות.</p>
             </div>
@@ -215,24 +208,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // JS to make the page interactive
             gsap.registerPlugin(ScrollTrigger);
             Chart.register(ChartDataLabels);
 
-            gsap.utils.toArray('.gsap-reveal').forEach(el => {
-                gsap.fromTo(el, {
-                    opacity: 0,
-                    y: 40
-                }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 90%',
-                        toggleActions: 'play none none none'
-                    }
-                });
+            // Robust animation setup
+            gsap.utils.toArray('.gsap-reveal').forEach(function(elem) {
+              gsap.from(elem, { 
+                scrollTrigger: {
+                  trigger: elem,
+                  start: 'top 95%', // Start animation when element is almost in view
+                  toggleActions: 'play none none none',
+                },
+                duration: 0.8, 
+                y: 40, 
+                opacity: 0,
+                ease: 'power3.out',
+              });
             });
 
             const chartDefaultOptions = {
@@ -259,8 +251,6 @@
                 }
             };
             
-            const titlePlugin = { title: { display: true, color: '#111827', font: { family: 'Assistant', size: 14 } } };
-
             // Fiscal Chart
             new Chart(document.getElementById('fiscalChart'), {
                 type: 'bar',

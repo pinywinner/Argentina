@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מערכת הפעלה: פרוטוקול תיקון המוח</title>
+    <title>מפת דרכים לצמיחה: המוח על פורנו</title>
     <!-- 
     Strategy Brief:
     Confidence Score: 95/100.
-    Narrative Thesis: Porn addiction is a neurochemical system exploit. Recovery is not a moral battle but a systematic re-engineering process. This is the blueprint for that upgrade.
-    Design Concept: Scrollytelling experience based on a "Constructivist / Imaginary Space" aesthetic. It's designed as an interactive, high-tech system diagnostic and repair manual, guiding the user through the data and protocol cinematically.
+    Narrative Thesis: Understanding the brain's response to internet pornography is the first step toward growth and recovery. This is an actionable roadmap for recalibrating the system for clarity, connection, and well-being.
+    Design Concept: "Organic Tech" / "Mindful Wellness". A clean, spacious, and calming aesthetic that uses natural metaphors (growth, clarity) and a soft, optimistic color palette. The goal is to present complex information in an approachable, non-threatening, and empowering way.
     Color Palette:
-    - bg_primary: #030712 (Gray-950) - Deep space, maximum focus.
-    - bg_secondary: #1f2937 (Gray-800) - Component and card backgrounds.
-    - text_primary: #f9fafb (Gray-50) - Core text, high contrast.
-    - text_secondary: #9ca3af (Gray-400) - Annotations, secondary info.
-    - accent_primary: #2563eb (Blue-600) - Structural elements, data points, interactive states.
-    - accent_secondary: #f59e0b (Amber-500) - Warnings, critical insights, optimized state highlights.
-    Success Metrics: The user will not just read, but *experience* the data narrative. They will feel a sense of clarity and control, understanding the problem as a solvable engineering challenge and seeing the recovery protocol as an actionable, intuitive upgrade path.
+    - bg_primary: #f8fafc (Slate-50) - Light, airy background.
+    - bg_secondary: #ffffff (White) - Card background for clean separation.
+    - text_primary: #1e293b (Slate-800) - Core text, high readability.
+    - text_secondary: #64748b (Slate-500) - Supporting text, annotations.
+    - accent_primary: #38bdf8 (Sky-500) - Key actions, data points, highlights.
+    - accent_secondary: #34d399 (Emerald-400) - Positive outcomes, growth, success states.
+    Success Metrics: The user will feel informed and empowered, not overwhelmed or judged. They will see the recovery process as a journey of growth and self-improvement, and feel equipped with a clear, intuitive plan to begin.
     -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -24,12 +24,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Heebo', sans-serif;
-            background-color: #030712;
-            color: #f9fafb;
+            background-color: #f8fafc;
+            color: #1e293b;
             overflow-x: hidden;
         }
         .section {
@@ -41,10 +41,9 @@
             position: relative;
         }
         .card {
-            background-color: rgba(31, 41, 55, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(55, 65, 81, 0.7);
-            border-radius: 0.75rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         .chart-container {
             position: relative;
@@ -55,23 +54,20 @@
         }
         .step {
             opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .is-visible {
-            opacity: 1;
-            transform: translateY(0);
+            transform: translateY(30px);
         }
         .protocol-tab {
             cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s;
-            background-color: #374151;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            color: #475569;
+            font-weight: 500;
         }
         .protocol-tab.active {
-            background-color: #2563eb;
+            background-color: #38bdf8;
             color: white;
+            box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.39);
         }
         .protocol-content {
             display: none;
@@ -79,44 +75,53 @@
         .protocol-content.active {
             display: block;
         }
-        .grid-line {
-            position: absolute;
-            background-color: rgba(55, 65, 81, 0.2);
+        .icon-wrapper {
+            background-color: #ecf8ff;
+            color: #38bdf8;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
         }
-        .grid-line.vertical { width: 1px; height: 100%; }
-        .grid-line.horizontal { height: 1px; width: 100%; }
     </style>
 </head>
 <body class="antialiased">
 
-    <div class="fixed top-0 left-0 w-full h-full -z-10" id="grid-bg"></div>
-
     <div class="container mx-auto">
 
         <section class="section text-center">
-            <h1 class="text-5xl md:text-8xl font-black text-white mb-4 animate-fade-in">ניתוח מערכת: המוח</h1>
-            <p class="text-2xl text-blue-400 animate-fade-in-delay">איתור פריצה. ניתוח נזקים. פרוטוקול תיקון.</p>
+            <h1 class="text-5xl md:text-7xl font-bold text-slate-900 mb-4">מפת דרכים לבהירות</h1>
+            <p class="text-xl text-slate-500">הבנת השפעת הפורנו על המוח והמסלול לחיים מלאים</p>
         </section>
 
         <section class="section" id="exploit-section">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 step">הפריצה: גירוי-על (Supernormal Stimulus)</h2>
-                <p class="text-lg text-gray-300 mb-8 step">פורנו אינטרנט אינו "עוד" גירוי. הוא גרסה מהונדסת, מוגזמת ועוצמתית של טריגרים שהמוח מתוכנת לחפש. הוא פורץ למערכת באמצעות שלושה וקטורי תקיפה מרכזיים:</p>
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 step">הבנת המנגנון: גירוי-על</h2>
+                <p class="text-lg text-slate-600 mb-12 step">פורנו אינטרנט פועל כ"גירוי-על" – גרסה מועצמת של טריגרים שהמוח שלנו מתוכנת לחפש. הוא משפיע על המערכת שלנו דרך שלושה ערוצים מרכזיים:</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="card p-6 step">
-                        <div class="text-4xl mb-4">🔄</div>
-                        <h3 class="text-xl font-bold text-white">חידוש אינסופי</h3>
-                        <p class="text-gray-400 mt-2">זרם בלתי פוסק של פרטנרים ותסריטים חדשים מנצל את "אפקט קולידג'", ומחזיק את מערכת הדופמין במצב של הצפה מתמדת.</p>
+                    <div class="card p-8 text-center step">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">חידוש אינסופי</h3>
+                        <p class="text-slate-500 mt-2">זרם בלתי פוסק של תוכן חדש מציף את המוח בדופמין, כימיקל המוטיבציה, ויוצר כמיהה מתמדת לעוד.</p>
                     </div>
-                    <div class="card p-6 step">
-                        <div class="text-4xl mb-4">📈</div>
-                        <h3 class="text-xl font-bold text-white">הגזמה מלאכותית</h3>
-                        <p class="text-gray-400 mt-2">מאפיינים פיזיים והתנהגותיים מועצמים יוצרים רף גירוי שהמציאות אינה יכולה להתחרות בו.</p>
+                    <div class="card p-8 text-center step">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">הגזמה מלאכותית</h3>
+                        <p class="text-slate-500 mt-2">תסריטים ומאפיינים לא מציאותיים יוצרים רף גירוי גבוה, שהופך את המציאות לפחות מתגמלת.</p>
                     </div>
-                    <div class="card p-6 step">
-                        <div class="text-4xl mb-4">⚡️</div>
-                        <h3 class="text-xl font-bold text-white">גישה מיידית</h3>
-                        <p class="text-gray-400 mt-2">זמינות 24/7, בחינם ובאנונימיות, מסירה את כל החסמים הטבעיים שהיו קיימים בעבר ומאפשרת צריכת יתר כרונית.</p>
+                    <div class="card p-8 text-center step">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">גישה מיידית</h3>
+                        <p class="text-slate-500 mt-2">זמינות 24/7, בפרטיות, מסירה חסמים טבעיים ומאפשרת צריכה כרונית שמשנה את כימיית המוח.</p>
                     </div>
                 </div>
             </div>
@@ -124,8 +129,8 @@
 
         <section class="section" id="damage-section">
             <div class="max-w-4xl mx-auto w-full">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">דו"ח נזקים: קריסת המערכת</h2>
-                <p class="text-center text-gray-300 mb-12 step">החשיפה הכרונית לגירוי-העל גורמת לשינויים מבניים במוח, המובילים לקריסה מדורגת בתחומי תפקוד מרכזיים. זהו לא באג, זה פיצ'ר של נוירופלסטיות.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">הבנת ההשפעות</h2>
+                <p class="text-center text-slate-600 mb-12 step">חשיפה ממושכת לגירוי-על יכולה להוביל לשינויים הדרגתיים בתפקוד המוח, המשפיעים על תחומים שונים בחיים.</p>
                 <div class="chart-container step">
                     <canvas id="damageChart"></canvas>
                 </div>
@@ -133,49 +138,46 @@
         </section>
         
         <section class="section" id="protocol-section">
-            <div class="max-w-5xl mx-auto w-full">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">פרוטוקול תיקון: הנדסת המערכת מחדש</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 card p-2 rounded-lg mb-8 step">
-                    <div id="tab-phase1" class="protocol-tab active text-center">שלב 1: בידוד</div>
-                    <div id="tab-phase2" class="protocol-tab text-center">שלב 2: כיול</div>
-                    <div id="tab-phase3" class="protocol-tab text-center">שלב 3: ביצור</div>
+            <div class="max-w-4xl mx-auto w-full">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">מפת הדרכים: המסע לשינוי</h2>
+                <div class="flex justify-center flex-wrap gap-4 bg-slate-100 p-2 rounded-full mb-8 step">
+                    <div id="tab-phase1" class="protocol-tab active">שלב 1: יצירת מרחב</div>
+                    <div id="tab-phase2" class="protocol-tab">שלב 2: בנייה מחדש</div>
+                    <div id="tab-phase3" class="protocol-tab">שלב 3: צמיחה</div>
                 </div>
 
                 <div id="content-phase1" class="protocol-content active step">
                     <div class="card p-8">
-                        <h3 class="text-2xl font-bold text-white">שלב 1: בידוד וניהול נזקים (ימים 1-30)</h3>
-                        <p class="text-gray-400 mt-2 mb-6"><strong>יעד:</strong> עצירה מוחלטת של הגירוי המזיק ויצירת סביבה סטרילית להתחלת הריפוי.</p>
-                        <ul class="list-disc list-inside space-y-3 text-gray-300">
-                            <li><strong>נעילה הרמטית:</strong> הסרת כל תוכן, התקנת חוסמים, מחיקת היסטוריה. אפס סובלנות.</li>
-                            <li><strong>שבירת התניות:</strong> שינוי סביבה פיזית ודיגיטלית. אין שימוש במסכים בחדר השינה.</li>
-                            <li><strong>ניהול גמילה:</strong> צפה לתסמינים (חרדה, ערפל מוחי). התמודד עם שינה, מים ופעילות גופנית מתונה.</li>
-                            <li class="text-amber-400"><strong>אתגר קריטי:</strong> הימנעות מוחלטת מתחליפים (רשתות חברתיות, אתרי היכרויות וכו').</li>
+                        <h3 class="text-2xl font-bold text-slate-800">שלב 1: יצירת מרחב (ימים 1-30)</h3>
+                        <p class="text-slate-500 mt-2 mb-6"><strong>המטרה:</strong> לאפשר למערכת העצבית מנוחה והתחלה של איזון טבעי.</p>
+                        <ul class="space-y-3 text-slate-600">
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>הפסקה מוחלטת:</strong> הימנעות מכל גירוי מיני מלאכותי (פורנו ותחליפים) כדי לאפשר למוח "לנשום".</span></li>
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>שינוי הרגלים:</strong> יצירת סביבה תומכת, כמו הוצאת מסכים מחדר השינה.</span></li>
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>קבלת תסמיני הגמילה:</strong> הבנה שתחושות כמו ערפל מוחי או עצבנות הן חלק טבעי וזמני מתהליך הריפוי.</span></li>
                         </ul>
                     </div>
                 </div>
 
                 <div id="content-phase2" class="protocol-content step">
                     <div class="card p-8">
-                        <h3 class="text-2xl font-bold text-white">שלב 2: כיול מערכת מחדש (ימים 31-90)</h3>
-                        <p class="text-gray-400 mt-2 mb-6"><strong>יעד:</strong> בנייה אקטיבית של מסלולים נוירולוגיים חדשים ובריאים. המעבר מהישרדות לצמיחה.</p>
-                        <ul class="list-disc list-inside space-y-3 text-gray-300">
-                            <li><strong>אימון פיזי התנגדותי:</strong> 3-4 אימוני כוח או HIIT בשבוע. חובה לאיזון דופמין.</li>
-                            <li><strong>תרגול שליטה מנטלית:</strong> 10 דקות מדיטציית מיינדפולנס ביום לחיזוק האונה הקדמית.</li>
-                            <li><strong>התמודדות עם ה-"Flatline":</strong> הבן שזהו שלב ריפוי הכרחי. אל תיבהל. זהו סימן שהמערכת מתקנת את עצמה.</li>
-                            <li class="text-amber-400"><strong>אתגר קריטי:</strong> חשיפה חברתית מבוקרת ויצירת קשרים אמיתיים.</li>
+                        <h3 class="text-2xl font-bold text-slate-800">שלב 2: בנייה מחדש (ימים 31-90)</h3>
+                        <p class="text-slate-500 mt-2 mb-6"><strong>המטרה:</strong> לבנות באופן פעיל מסלולים עצביים חדשים ובריאים.</p>
+                        <ul class="space-y-3 text-slate-600">
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>פעילות גופנית:</strong> הדרך היעילה ביותר לאזן את כימיית המוח באופן טבעי.</span></li>
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>תרגול מיינדפולנס:</strong> 10 דקות ביום לחיזוק הקשר עם האונה הקדמית, האחראית על שליטה עצמית.</span></li>
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>התמודדות עם ה-"Flatline":</strong> קבלת התקופה של ירידה בחשק המיני כשלב ריפוי הכרחי, לא כבעיה.</span></li>
                         </ul>
                     </div>
                 </div>
 
                 <div id="content-phase3" class="protocol-content step">
                     <div class="card p-8">
-                        <h3 class="text-2xl font-bold text-white">שלב 3: ביצור והטמעה (ימים 90+)</h3>
-                        <p class="text-gray-400 mt-2 mb-6"><strong>יעד:</strong> להפוך את השינוי לאורח חיים. בניית מערכת חסינה שמפיקה תגמול מהעולם האמיתי.</p>
-                        <ul class="list-disc list-inside space-y-3 text-gray-300">
-                            <li><strong>בניית פרויקט משמעותי:</strong> הפנה את האנרגיה המנטלית שהתפנתה ליצירה, למידה או יזמות.</li>
-                            <li><strong>העמקת קשרים:</strong> תרגל הקשבה פעילה ופגיעות רגשית במערכות יחסים.</li>
-                            <li><strong>אימוץ פילוסופיית חיים:</strong> בנה מסגרת ערכית שמנחה את החלטותיך בזמן אמת.</li>
-                            <li class="text-amber-400"><strong>אתגר קריטי:</strong> חוסן מול נפילות. ראה בכל מעידה איסוף מודיעין, לא כישלון.</li>
+                        <h3 class="text-2xl font-bold text-slate-800">שלב 3: צמיחה (ימים 90+)</h3>
+                        <p class="text-slate-500 mt-2 mb-6"><strong>המטרה:</strong> להפוך את השינוי לחלק טבעי מאורח החיים.</p>
+                        <ul class="space-y-3 text-slate-600">
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>מציאת משמעות:</strong> הפניית האנרגיה שהתפנתה לתחביבים, פרויקטים ומטרות שמעניקים סיפוק עמוק.</span></li>
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>העמקת קשרים:</strong> השקעה במערכות יחסים אמיתיות המבוססות על חיבור, לא על גירוי.</span></li>
+                            <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✓</span><span><strong>חוסן וחמלה:</strong> הבנה שנפילות הן חלק מהדרך. המפתח הוא ללמוד מהן ולהמשיך קדימה.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -184,8 +186,8 @@
 
         <section class="section" id="upgrade-section">
             <div class="max-w-4xl mx-auto w-full">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">השדרוג: מערכת הפעלה 2.0</h2>
-                <p class="text-center text-gray-300 mb-12 step">היעד אינו חזרה לנקודת האפס. היעד הוא בניית גרסה חזקה, ממוקדת וחסינה יותר של עצמך. התרשים מציג את השינוי בביצועי המערכת.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">התוצאה: חיים מאוזנים יותר</h2>
+                <p class="text-center text-slate-600 mb-12 step">היעד הוא לא רק להיגמל, אלא לגלות גרסה רגועה, ממוקדת ומחוברת יותר של עצמך. התרשים מציג את השינוי הפוטנציאלי בתחומי חיים מרכזיים.</p>
                 <div class="chart-container step">
                     <canvas id="upgradeChart"></canvas>
                 </div>
@@ -198,19 +200,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         gsap.registerPlugin(ScrollTrigger);
 
-        // --- Background Grid ---
-        const gridBg = document.getElementById('grid-bg');
-        for (let i = 0; i < 20; i++) {
-            const vertical = document.createElement('div');
-            vertical.className = 'grid-line vertical';
-            vertical.style.left = `${i * 5}%`;
-            gridBg.appendChild(vertical);
-            const horizontal = document.createElement('div');
-            horizontal.className = 'grid-line horizontal';
-            horizontal.style.top = `${i * 5}%`;
-            gridBg.appendChild(horizontal);
-        }
-
         // --- Scrollytelling Animations ---
         const sections = document.querySelectorAll('.section');
         sections.forEach(section => {
@@ -218,15 +207,15 @@
             gsap.from(steps, {
                 scrollTrigger: {
                     trigger: section,
-                    start: "top 75%",
+                    start: "top 80%",
                     end: "bottom center",
                     toggleActions: "play none none none"
                 },
                 opacity: 0,
-                y: 50,
+                y: 30,
                 duration: 0.8,
                 stagger: 0.2,
-                ease: "power3.out"
+                ease: "power2.out"
             });
         });
 
@@ -260,7 +249,7 @@
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { labels: { color: '#f9fafb', font: { family: "'Heebo', sans-serif" } } },
+                legend: { labels: { color: '#475569', font: { family: "'Heebo', sans-serif", size: 14 } } },
                 tooltip: {
                     callbacks: { title: tooltipTitleCallback },
                     bodyFont: { family: "'Heebo', sans-serif" },
@@ -278,17 +267,18 @@
                 datasets: [{
                     label: 'רמת תפקוד ממוצעת (מדווחת)',
                     data: [25, 40, 35, 30, 45],
-                    backgroundColor: 'rgba(37, 99, 235, 0.7)',
-                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                    borderColor: '#38bdf8',
                     borderWidth: 2,
-                    borderRadius: 5
+                    borderRadius: 8,
+                    borderSkipped: false,
                 }]
             },
             options: { ...defaultChartOptions,
                 indexAxis: 'y',
                 scales: {
-                    x: { beginAtZero: true, max: 100, ticks: { color: '#9ca3af' }, grid: { color: 'rgba(156, 163, 175, 0.1)' } },
-                    y: { ticks: { color: '#f9fafb' }, grid: { display: false } }
+                    x: { beginAtZero: true, max: 100, ticks: { color: '#94a3b8' }, grid: { color: '#e2e8f0' } },
+                    y: { ticks: { color: '#334155', font: {size: 14} }, grid: { display: false } }
                 }
             }
         });
@@ -298,28 +288,28 @@
         const upgradeChart = new Chart(upgradeCtx, {
             type: 'radar',
             data: {
-                labels: ['בהירות קוגניטיבית', ['חוסן רגשי', '& ניהול לחצים'], ['דחף ומיקוד', 'במטרות'], 'חיבור חברתי', 'בריאות מינית'],
+                labels: ['בהירות מחשבה', ['חוסן רגשי', 'וניהול לחצים'], ['מיקוד', 'במטרות'], 'חיבור חברתי', 'בריאות מינית'],
                 datasets: [{
-                    label: 'מערכת פגועה',
+                    label: 'נקודת התחלה',
                     data: [3, 2, 2, 4, 1],
-                    backgroundColor: 'rgba(37, 99, 235, 0.2)',
-                    borderColor: '#2563eb',
-                    pointBackgroundColor: '#2563eb'
+                    backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                    borderColor: '#38bdf8',
+                    pointBackgroundColor: '#38bdf8'
                 }, {
-                    label: 'מערכת משודרגת',
+                    label: 'לאחר התהליך',
                     data: [3, 2, 2, 4, 1], // Start with same data
-                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
-                    borderColor: '#f59e0b',
-                    pointBackgroundColor: '#f59e0b'
+                    backgroundColor: 'rgba(52, 211, 153, 0.2)',
+                    borderColor: '#34d399',
+                    pointBackgroundColor: '#34d399'
                 }]
             },
             options: { ...defaultChartOptions,
                 scales: {
                     r: {
-                        angleLines: { color: '#374151' },
-                        grid: { color: '#374151' },
-                        pointLabels: { color: '#f9fafb', font: { size: 12 } },
-                        ticks: { display: false, stepSize: 2 },
+                        angleLines: { color: '#cbd5e1' },
+                        grid: { color: '#e2e8f0' },
+                        pointLabels: { color: '#1e293b', font: { size: 13 } },
+                        ticks: { display: false, stepSize: 2, backdropColor: 'rgba(255,255,255,0.75)' },
                         min: 0,
                         max: 10
                     }
@@ -331,12 +321,12 @@
         gsap.to(upgradeChart.data.datasets[1].data, {
             ...{0:9, 1:8, 2:9, 3:8, 4:8}, // Target values
             duration: 1.5,
-            ease: "power3.inOut",
+            ease: "power2.inOut",
             scrollTrigger: {
                 trigger: "#upgrade-section",
-                start: "top 50%",
+                start: "top 60%",
                 onEnter: () => upgradeChart.update(),
-                onEnterBack: () => upgradeChart.update(), // Optional: re-animate when scrolling back
+                onEnterBack: () => upgradeChart.update(),
             },
             onUpdate: () => upgradeChart.update()
         });

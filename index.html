@@ -81,35 +81,26 @@
             align-items: center;
             justify-content: center;
         }
-        .timeline-item {
-            position: relative;
-            padding-bottom: 3rem;
-            padding-right: 2.5rem;
+        .accordion-item {
+            border-bottom: 1px solid #e2e8f0;
         }
-        .timeline-item:not(:last-child)::before {
-            content: '';
-            position: absolute;
-            top: 12px;
-            right: 11px;
-            width: 2px;
-            height: 100%;
-            background-color: #e2e8f0;
+        .accordion-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
         }
-        .timeline-dot {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 24px;
-            height: 24px;
-            background-color: #f8fafc;
-            border: 4px solid #0ea5e9;
-            border-radius: 50%;
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
         }
-        .timeline-dot-inner {
-            width: 8px;
-            height: 8px;
-            background-color: #0ea5e9;
-            border-radius: 50%;
+        .accordion-arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -169,75 +160,87 @@
             <div class="max-w-4xl mx-auto w-full">
                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">מפת הדרכים: המסע לשינוי</h2>
                 <div class="card p-8 step">
-                    <div class="timeline">
-                        <!-- Timeline Item 1 -->
-                        <div class="timeline-item">
-                            <div class="timeline-dot flex items-center justify-center"><div class="timeline-dot-inner"></div></div>
-                            <h3 class="text-3xl font-bold text-slate-800 mb-4">שלב 1: יצירת מרחב (ימים 1-30)</h3>
-                            <div class="space-y-6">
-                                <p class="text-lg"><strong>המטרה:</strong> לאפשר למערכת העצבית מנוחה והתחלה של איזון טבעי. זהו שלב של ניקוי רעשים ויצירת בסיס יציב להמשך.</p>
-                                <div>
-                                    <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
-                                    <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
-                                        <li><strong>ניתוק מוחלט מהמקור:</strong> הסרת כל תוכן, התקנת חוסמים. אפס סובלנות.</li>
-                                        <li><strong>שבירת התניות סביבתיות:</strong> אין מסכים בחדר השינה. שינוי סידור החדר.</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-slate-700">אתגר צפוי: תסמיני גמילה</h4>
-                                    <p class="mt-2 text-slate-600">צפה לערפל מוחי, עצבנות, חרדה וקשיי שינה. זו תגובה כימית נורמלית וזמנית. התמודד איתה בעזרת שינה מסודרת, שתיית מים, והליכות קצרות.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-emerald-500">ההישג: בהירות ראשונית</h4>
-                                    <p class="mt-2 text-slate-600">בסוף שלב זה, תתחיל לחוות רגעים של שקט מנטלי. התשוקות עדיין קיימות, אך ה"רעש" הכללי יורד, ואתה מתחיל להרגיש שאתה חוזר לשלוט בהגה.</p>
+                    <div class="accordion">
+                        <!-- Accordion Item 1 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="text-2xl font-bold text-slate-800">שלב 1: יצירת מרחב (ימים 1-30)</span>
+                                <svg class="accordion-arrow w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="pt-4 pb-8 space-y-6">
+                                    <p><strong>המטרה:</strong> לאפשר למערכת העצבית מנוחה והתחלה של איזון טבעי. זהו שלב של ניקוי רעשים ויצירת בסיס יציב להמשך.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>ניתוק מוחלט מהמקור:</strong> הסרת כל תוכן, התקנת חוסמים. אפס סובלנות.</li>
+                                            <li><strong>שבירת התניות סביבתיות:</strong> אין מסכים בחדר השינה. שינוי סידור החדר.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: תסמיני גמילה</h4>
+                                        <p class="mt-2 text-slate-600">צפה לערפל מוחי, עצבנות, חרדה וקשיי שינה. זו תגובה כימית נורמלית וזמנית. התמודד איתה בעזרת שינה מסודרת, שתיית מים, והליכות קצרות.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-500">ההישג: בהירות ראשונית</h4>
+                                        <p class="mt-2 text-slate-600">בסוף שלב זה, תתחיל לחוות רגעים של שקט מנטלי. התשוקות עדיין קיימות, אך ה"רעש" הכללי יורד, ואתה מתחיל להרגיש שאתה חוזר לשלוט בהגה.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Timeline Item 2 -->
-                         <div class="timeline-item">
-                            <div class="timeline-dot flex items-center justify-center"><div class="timeline-dot-inner"></div></div>
-                            <h3 class="text-3xl font-bold text-slate-800 mb-4">שלב 2: בנייה מחדש (ימים 31-90)</h3>
-                            <div class="space-y-6">
-                                <p class="text-lg"><strong>המטרה:</strong> לבנות באופן פעיל מסלולים נוירולוגיים חדשים ובריאים שיספקו תגמול טבעי ויחליפו את התלות בגירוי המלאכותי.</p>
-                                <div>
-                                    <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
-                                    <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
-                                        <li><strong>פעילות גופנית אינטנסיבית:</strong> 3-4 אימונים בשבוע. הדרך היעילה ביותר לאיזון דופמין טבעי.</li>
-                                        <li><strong>תרגול מיינדפולנס:</strong> 10 דקות מדיטציה ביום לחיזוק השליטה העצמית.</li>
-                                        <li><strong>חשיפה חברתית מבוקרת:</strong> יצירת קשרים אמיתיים, גם אם זה מתחיל בקטן.</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-slate-700">אתגר צפוי: ה-"Flatline"</h4>
-                                    <p class="mt-2 text-slate-600">תקופה של ירידה דרמטית בחשק המיני. זהו לא נזק, אלא <strong class="text-emerald-500">סימן ריפוי קריטי</strong>. המוח מכייל מחדש את המערכת המינית. קבל את התקופה הזו בסבלנות.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-emerald-500">ההישג: חיוניות חוזרת</h4>
-                                    <p class="mt-2 text-slate-600">האנרגיה הכללית עולה. המוטיבציה לפעילויות יומיומיות חוזרת. המשיכה המינית מתחילה להתעורר מחדש, הפעם כלפי אנשים אמיתיים.</p>
+                        <!-- Accordion Item 2 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="text-2xl font-bold text-slate-800">שלב 2: בנייה מחדש (ימים 31-90)</span>
+                                <svg class="accordion-arrow w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                               <div class="pt-4 pb-8 space-y-6">
+                                    <p><strong>המטרה:</strong> לבנות באופן פעיל מסלולים נוירולוגיים חדשים ובריאים שיספקו תגמול טבעי ויחליפו את התלות בגירוי המלאכותי.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>פעילות גופנית אינטנסיבית:</strong> 3-4 אימונים בשבוע. הדרך היעילה ביותר לאיזון דופמין טבעי.</li>
+                                            <li><strong>תרגול מיינדפולנס:</strong> 10 דקות מדיטציה ביום לחיזוק השליטה העצמית.</li>
+                                            <li><strong>חשיפה חברתית מבוקרת:</strong> יצירת קשרים אמיתיים, גם אם זה מתחיל בקטן.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: ה-"Flatline"</h4>
+                                        <p class="mt-2 text-slate-600">תקופה של ירידה דרמטית בחשק המיני. זהו לא נזק, אלא <strong class="text-emerald-500">סימן ריפוי קריטי</strong>. המוח מכייל מחדש את המערכת המינית. קבל את התקופה הזו בסבלנות.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-500">ההישג: חיוניות חוזרת</h4>
+                                        <p class="mt-2 text-slate-600">האנרגיה הכללית עולה. המוטיבציה לפעילויות יומיומיות חוזרת. המשיכה המינית מתחילה להתעורר מחדש, הפעם כלפי אנשים אמיתיים.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Timeline Item 3 -->
-                         <div class="timeline-item">
-                            <div class="timeline-dot flex items-center justify-center"><div class="timeline-dot-inner"></div></div>
-                            <h3 class="text-3xl font-bold text-slate-800 mb-4">שלב 3: צמיחה (ימים 90+)</h3>
-                            <div class="space-y-6">
-                                <p class="text-lg"><strong>המטרה:</strong> להפוך את השינוי לחלק טבעי מאורח החיים ולבנות חוסן מנטלי ורגשי לטווח הארוך.</p>
-                                <div>
-                                    <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
-                                    <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
-                                        <li><strong>מציאת משמעות:</strong> הפניית האנרגיה לתחביבים, פרויקטים ומטרות שמעניקים סיפוק עמוק.</li>
-                                        <li><strong>העמקת קשרים:</strong> השקעה במערכות יחסים המבוססות על חיבור ואינטימיות.</li>
-                                        <li><strong>בניית חוסן מול נפילות:</strong> הבנה שנפילה אינה כישלון, אלא הזדמנות ללמוד ולהתאים את המערכת.</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-slate-700">אתגר צפוי: שאננות</h4>
-                                    <p class="mt-2 text-slate-600">לאחר תקופה טובה, קל לחזור להרגלים ישנים. המפתח הוא להישאר מודע, להמשיך בתרגול, ולא לקחת את ההתקדמות כמובנת מאליה.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-emerald-500">ההישג: חופש אמיתי</h4>
-                                    <p class="mt-2 text-slate-600">השליטה חוזרת לידיים שלך. אתה כבר לא מונע על ידי דחפים, אלא על ידי ערכים ומטרות. זוהי תחושה של חופש פנימי ויציבות.</p>
+                        <!-- Accordion Item 3 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="text-2xl font-bold text-slate-800">שלב 3: צמיחה (ימים 90+)</span>
+                                <svg class="accordion-arrow w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="pt-4 pb-8 space-y-6">
+                                    <p><strong>המטרה:</strong> להפוך את השינוי לחלק טבעי מאורח החיים ולבנות חוסן מנטלי ורגשי לטווח הארוך.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>מציאת משמעות:</strong> הפניית האנרגיה לתחביבים, פרויקטים ומטרות שמעניקים סיפוק עמוק.</li>
+                                            <li><strong>העמקת קשרים:</strong> השקעה במערכות יחסים המבוססות על חיבור ואינטימיות.</li>
+                                            <li><strong>בניית חוסן מול נפילות:</strong> הבנה שנפילה אינה כישלון, אלא הזדמנות ללמוד ולהתאים את המערכת.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: שאננות</h4>
+                                        <p class="mt-2 text-slate-600">לאחר תקופה טובה, קל לחזור להרגלים ישנים. המפתח הוא להישאר מודע, להמשיך בתרגול, ולא לקחת את ההתקדמות כמובנת מאליה.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-500">ההישג: חופש אמיתי</h4>
+                                        <p class="mt-2 text-slate-600">השליטה חוזרת לידיים שלך. אתה כבר לא מונע על ידי דחפים, אלא על ידי ערכים ומטרות. זוהי תחושה של חופש פנימי ויציבות.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -284,115 +287,115 @@
         const textSteps = gsap.utils.toArray('.sticky-text-content');
         const vizSteps = gsap.utils.toArray('.viz-step');
         const canvas = document.getElementById('brain-viz');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        
-        function resizeCanvas() {
-            width = canvas.offsetWidth;
-            height = canvas.offsetHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const brainState = {
-            stimuli: [],
-            receptorDensity: 1,
-            pathwayStrength: 0,
-            pfcOpacity: 0
-        };
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) * 0.4;
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width, height;
             
-            // Draw brain outline
-            ctx.strokeStyle = '#cbd5e1';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-            ctx.stroke();
+            function resizeCanvas() {
+                width = canvas.offsetWidth;
+                height = canvas.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
 
-            // Draw stimuli
-            brainState.stimuli.forEach(s => {
+            const brainState = {
+                stimuli: [],
+                receptorDensity: 1,
+                pathwayStrength: 0,
+                pfcOpacity: 0
+            };
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+                const centerX = width / 2;
+                const centerY = height / 2;
+                const radius = Math.min(width, height) * 0.4;
+                
+                // Draw brain outline
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 3;
                 ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(14, 165, 233, ${s.opacity})`;
-                ctx.fill();
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Draw stimuli
+                brainState.stimuli.forEach(s => {
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(14, 165, 233, ${s.opacity})`;
+                    ctx.fill();
+                });
+
+                // Draw receptors
+                ctx.fillStyle = '#0ea5e9';
+                for(let i = 0; i < 20 * brainState.receptorDensity; i++) {
+                    const angle = (i / (20 * brainState.receptorDensity)) * Math.PI * 2;
+                    const x = centerX + Math.cos(angle) * radius;
+                    const y = centerY + Math.sin(angle) * radius;
+                    ctx.fillRect(x - 2, y - 2, 4, 4);
+                }
+
+                // Draw pathway
+                if (brainState.pathwayStrength > 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(width * 0.2, centerY);
+                    ctx.quadraticCurveTo(centerX, centerY - radius, width * 0.8, centerY);
+                    ctx.lineWidth = brainState.pathwayStrength * 8;
+                    ctx.strokeStyle = `rgba(245, 158, 11, ${brainState.pathwayStrength})`;
+                    ctx.stroke();
+                }
+                
+                // Draw PFC
+                if (brainState.pfcOpacity > 0) {
+                    ctx.fillStyle = `rgba(100, 116, 139, ${brainState.pfcOpacity})`;
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY - radius);
+                    ctx.arc(centerX, centerY - radius, radius * 0.5, 0.2 * Math.PI, 0.8 * Math.PI);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+            
+            gsap.ticker.add(draw);
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".sticky-container",
+                    start: "top top",
+                    end: "+=300%",
+                    scrub: 1,
+                    pin: true,
+                }
             });
 
-            // Draw receptors
-            ctx.fillStyle = '#0ea5e9';
-            for(let i = 0; i < 20 * brainState.receptorDensity; i++) {
-                const angle = (i / (20 * brainState.receptorDensity)) * Math.PI * 2;
-                const x = centerX + Math.cos(angle) * radius;
-                const y = centerY + Math.sin(angle) * radius;
-                ctx.fillRect(x - 2, y - 2, 4, 4);
-            }
-
-            // Draw pathway
-            if (brainState.pathwayStrength > 0) {
-                ctx.beginPath();
-                ctx.moveTo(width * 0.2, centerY);
-                ctx.quadraticCurveTo(centerX, centerY - radius, width * 0.8, centerY);
-                ctx.lineWidth = brainState.pathwayStrength * 8;
-                ctx.strokeStyle = `rgba(245, 158, 11, ${brainState.pathwayStrength})`;
-                ctx.stroke();
-            }
-            
-            // Draw PFC
-            if (brainState.pfcOpacity > 0) {
-                ctx.fillStyle = `rgba(100, 116, 139, ${brainState.pfcOpacity})`;
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY - radius);
-                ctx.arc(centerX, centerY - radius, radius * 0.5, 0.2 * Math.PI, 0.8 * Math.PI);
-                ctx.closePath();
-                ctx.fill();
-            }
-        }
-        
-        gsap.ticker.add(draw);
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".sticky-container",
-                start: "top top",
-                end: "+=300%",
-                scrub: 1,
-                pin: true,
-            }
-        });
-
-        tl.to(brainState, {
-            onStart: () => {
+            tl.call(() => {
+                brainState.stimuli = [];
                 for(let i=0; i<20; i++) {
                     const stimulus = { x: Math.random() * width, y: 0, r: 3, opacity: 1 };
                     brainState.stimuli.push(stimulus);
                     gsap.to(stimulus, { y: height, duration: 2 + Math.random() * 2, repeat: -1, ease: 'none' });
                 }
-            },
-            onReverseComplete: () => brainState.stimuli = []
-        })
-        .to(brainState, { receptorDensity: 0.3, duration: 1 })
-        .to(brainState, { pathwayStrength: 1, duration: 1 })
-        .to(brainState, { pfcOpacity: 0.3, duration: 1 });
+            })
+            .to(brainState, { receptorDensity: 0.3, duration: 1 })
+            .to(brainState, { pathwayStrength: 1, duration: 1, onStart: () => brainState.stimuli = [] })
+            .to(brainState, { pfcOpacity: 0.3, duration: 1 });
 
-        vizSteps.forEach((step, i) => {
-            ScrollTrigger.create({
-                trigger: step,
-                start: "top center",
-                end: "bottom center",
-                onToggle: self => {
-                    if (self.isActive) {
-                        textSteps.forEach(text => text.classList.remove('is-active'));
-                        if(textSteps[i]) textSteps[i].classList.add('is-active');
+            vizSteps.forEach((step, i) => {
+                ScrollTrigger.create({
+                    trigger: step,
+                    start: "top center",
+                    end: "bottom center",
+                    onToggle: self => {
+                        if (self.isActive) {
+                            textSteps.forEach(text => text.classList.remove('is-active'));
+                            if(textSteps[i]) textSteps[i].classList.add('is-active');
+                        }
                     }
-                }
+                });
             });
-        });
+        }
         
         // --- Accordion Logic ---
         document.querySelectorAll('.accordion-item').forEach(item => {

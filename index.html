@@ -60,6 +60,11 @@
             align-items: start;
             position: relative;
         }
+        @media (max-width: 768px) {
+            .sticky-container {
+                grid-template-columns: 1fr;
+            }
+        }
         .sticky-text-panel {
             position: sticky;
             top: 25vh;
@@ -146,7 +151,18 @@
                 <div class="sticky-viz-panel">
                     <div class="viz-step" data-step="1">
                         <div class="w-full max-w-md">
-                            <canvas id="brain-viz"></canvas>
+                            <svg id="brain-viz" viewBox="0 0 400 300" class="w-full h-auto">
+                                <!-- Brain Outline -->
+                                <path id="brain-outline" d="M 200,50 C 100,50 50,150 150,250 C 250,350 350,150 300,100 C 250,50 200,50 200,50 Z" fill="#f0f9ff" stroke="#e0f2fe" stroke-width="2"/>
+                                <!-- Stimuli -->
+                                <g id="stimuli-group"></g>
+                                <!-- Receptors -->
+                                <g id="receptors-group"></g>
+                                <!-- Pathway -->
+                                <path id="pathway" d="M 80,180 C 150,100 250,100 320,180" stroke-width="0" stroke="#f59e0b" fill="none" stroke-linecap="round"/>
+                                <!-- PFC -->
+                                <path id="pfc" d="M 170,52 A 70 70 0 0 1 230,52" fill="#cbd5e1" opacity="0"/>
+                            </svg>
                         </div>
                     </div>
                     <div class="viz-step" data-step="2"></div>
@@ -283,82 +299,31 @@
             );
         });
         
-        // --- Mechanism Scrollytelling with Canvas ---
+        // --- Mechanism Scrollytelling with SVG ---
         const textSteps = gsap.utils.toArray('.sticky-text-content');
         const vizSteps = gsap.utils.toArray('.viz-step');
-        const canvas = document.getElementById('brain-viz');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            
-            function resizeCanvas() {
-                width = canvas.offsetWidth;
-                height = canvas.offsetHeight;
-                canvas.width = width;
-                canvas.height = height;
+        const brainViz = document.getElementById('brain-viz');
+        
+        if(brainViz) {
+            const stimuliGroup = document.getElementById('stimuli-group');
+            const receptorsGroup = document.getElementById('receptors-group');
+            const pathway = document.getElementById('pathway');
+            const pfc = document.getElementById('pfc');
+            const brainOutline = document.getElementById('brain-outline').getBBox();
+
+            // Populate receptors
+            for (let i = 0; i < 30; i++) {
+                const angle = (i / 30) * Math.PI * 1.5 + Math.PI * 0.25;
+                const x = brainOutline.x + brainOutline.width / 2 + Math.cos(angle) * (brainOutline.width / 2.2);
+                const y = brainOutline.y + brainOutline.height / 2 + Math.sin(angle) * (brainOutline.height / 1.8);
+                const receptor = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                receptor.setAttribute('cx', x);
+                receptor.setAttribute('cy', y);
+                receptor.setAttribute('r', 3);
+                receptor.setAttribute('fill', '#0ea5e9');
+                receptorsGroup.appendChild(receptor);
             }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            const brainState = {
-                stimuli: [],
-                receptorDensity: 1,
-                pathwayStrength: 0,
-                pfcOpacity: 0
-            };
-
-            function draw() {
-                ctx.clearRect(0, 0, width, height);
-                const centerX = width / 2;
-                const centerY = height / 2;
-                const radius = Math.min(width, height) * 0.4;
-                
-                // Draw brain outline
-                ctx.strokeStyle = '#cbd5e1';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-                ctx.stroke();
-
-                // Draw stimuli
-                brainState.stimuli.forEach(s => {
-                    ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(14, 165, 233, ${s.opacity})`;
-                    ctx.fill();
-                });
-
-                // Draw receptors
-                ctx.fillStyle = '#0ea5e9';
-                for(let i = 0; i < 20 * brainState.receptorDensity; i++) {
-                    const angle = (i / (20 * brainState.receptorDensity)) * Math.PI * 2;
-                    const x = centerX + Math.cos(angle) * radius;
-                    const y = centerY + Math.sin(angle) * radius;
-                    ctx.fillRect(x - 2, y - 2, 4, 4);
-                }
-
-                // Draw pathway
-                if (brainState.pathwayStrength > 0) {
-                    ctx.beginPath();
-                    ctx.moveTo(width * 0.2, centerY);
-                    ctx.quadraticCurveTo(centerX, centerY - radius, width * 0.8, centerY);
-                    ctx.lineWidth = brainState.pathwayStrength * 8;
-                    ctx.strokeStyle = `rgba(245, 158, 11, ${brainState.pathwayStrength})`;
-                    ctx.stroke();
-                }
-                
-                // Draw PFC
-                if (brainState.pfcOpacity > 0) {
-                    ctx.fillStyle = `rgba(100, 116, 139, ${brainState.pfcOpacity})`;
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY - radius);
-                    ctx.arc(centerX, centerY - radius, radius * 0.5, 0.2 * Math.PI, 0.8 * Math.PI);
-                    ctx.closePath();
-                    ctx.fill();
-                }
-            }
-            
-            gsap.ticker.add(draw);
+            const allReceptors = gsap.utils.toArray('#receptors-group circle');
 
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -370,17 +335,47 @@
                 }
             });
 
-            tl.call(() => {
-                brainState.stimuli = [];
-                for(let i=0; i<20; i++) {
-                    const stimulus = { x: Math.random() * width, y: 0, r: 3, opacity: 1 };
-                    brainState.stimuli.push(stimulus);
-                    gsap.to(stimulus, { y: height, duration: 2 + Math.random() * 2, repeat: -1, ease: 'none' });
+            // Step 1: Stimuli
+            tl.fromTo(stimuliGroup, {opacity: 0}, {
+                opacity: 1,
+                duration: 0.5,
+                onStart: () => {
+                    stimuliGroup.innerHTML = '';
+                    for(let i=0; i<15; i++) {
+                        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        dot.setAttribute('r', 4);
+                        dot.setAttribute('fill', '#0ea5e9');
+                        stimuliGroup.appendChild(dot);
+                        gsap.fromTo(dot, 
+                            { cx: 200 + (Math.random() - 0.5) * 400, cy: -20 },
+                            { cx: 200 + (Math.random() - 0.5) * 100, cy: 150, duration: 2, stagger: Math.random() * 0.5, ease: 'power1.in' }
+                        );
+                    }
                 }
-            })
-            .to(brainState, { receptorDensity: 0.3, duration: 1 })
-            .to(brainState, { pathwayStrength: 1, duration: 1, onStart: () => brainState.stimuli = [] })
-            .to(brainState, { pfcOpacity: 0.3, duration: 1 });
+            });
+
+            // Step 2: Desensitization
+            tl.to(allReceptors, {
+                scale: 0,
+                opacity: 0,
+                stagger: {
+                    each: 0.05,
+                    from: "random"
+                },
+                duration: 1
+            }, "+=0.5");
+
+            // Step 3: Sensitization
+            tl.to(pathway, {
+                strokeWidth: 8,
+                duration: 1
+            }, "+=0.5");
+
+            // Step 4: Hypofrontality
+            tl.to(pfc, {
+                opacity: 0.2,
+                duration: 1
+            }, "+=0.5");
 
             vizSteps.forEach((step, i) => {
                 ScrollTrigger.create({
@@ -403,10 +398,12 @@
             const content = item.querySelector('.accordion-content');
             header.addEventListener('click', () => {
                 const isOpen = item.classList.contains('open');
+                // Close all items
                 document.querySelectorAll('.accordion-item').forEach(i => {
                     i.classList.remove('open');
                     i.querySelector('.accordion-content').style.maxHeight = '0px';
                 });
+                // Open the clicked one if it wasn't open
                 if (!isOpen) {
                     item.classList.add('open');
                     content.style.maxHeight = content.scrollHeight + 'px';

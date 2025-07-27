@@ -6,17 +6,17 @@
     <title>מפת דרכים לצמיחה: המוח על פורנו</title>
     <!-- 
     Strategy Brief:
-    Confidence Score: 98/100.
-    Narrative Thesis: Recovery from porn addiction is a journey of understanding and growth. This is a comprehensive, non-threatening, and actionable guide to re-calibrating the brain's reward system for a more fulfilling life.
-    Design Concept: "Mindful Growth". A clean, spacious, and calming aesthetic that uses organic visual metaphors (neural pathways, growth) and a soft, optimistic color palette. The goal is to transform complex, potentially intimidating information into an empowering and intuitive user experience.
+    Confidence Score: 99/100.
+    Narrative Thesis: Recovery from porn addiction is an engineering problem, not a moral one. This interactive blueprint provides a deep dive into the system's mechanics and a comprehensive, actionable protocol for a full system upgrade.
+    Design Concept: "Mindful Engineering". A clean, spacious, and calming aesthetic that uses abstract, animated diagrams and a structured, interactive layout. The goal is to empower the user with clarity and a sense of control over the process.
     Color Palette:
-    - bg_primary: #f8fafc (Slate-50) - Light, airy, and clean.
-    - bg_secondary: #ffffff (White) - Card backgrounds for clear focus.
-    - text_primary: #0f172a (Slate-900) - Core text for maximum readability.
-    - text_secondary: #64748b (Slate-500) - Supporting text and annotations.
-    - accent_primary: #0ea5e9 (Sky-500) - Key actions, data points, interactive states.
-    - accent_secondary: #10b981 (Emerald-500) - Positive outcomes, growth, success states.
-    Success Metrics: The user will feel guided, informed, and empowered. They will understand the nuances of both the addiction mechanism and the recovery protocol in-depth, viewing the entire process as a manageable and hopeful journey of self-improvement.
+    - bg_primary: #f8fafc (Slate-50)
+    - bg_secondary: #ffffff (White)
+    - text_primary: #0f172a (Slate-900)
+    - text_secondary: #64748b (Slate-500)
+    - accent_primary: #0ea5e9 (Sky-500)
+    - accent_secondary: #10b981 (Emerald-500)
+    Success Metrics: The user will feel they have a complete, in-depth, and actionable guide. They will understand the 'why' behind each step and feel confident in their ability to execute the recovery protocol, viewing it as a clear path to a better-functioning system.
     -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -53,64 +53,63 @@
             opacity: 0;
             transform: translateY(20px);
         }
-        .protocol-tab {
-            cursor: pointer;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
-            transition: all 0.3s ease-in-out;
-            color: #475569;
-            font-weight: 500;
-            border: 1px solid transparent;
-        }
-        .protocol-tab.active {
-            background-color: #0ea5e9;
-            color: white;
-            box-shadow: 0 4px 14px 0 rgba(14, 165, 233, 0.3);
-        }
-        .protocol-content {
-            display: none;
-        }
-        .protocol-content.active {
-            display: block;
-        }
-        .icon-wrapper {
-            background-color: #f0f9ff;
-            color: #0ea5e9;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-        }
         .sticky-container {
             display: grid;
-            grid-template-columns: 2fr 3fr;
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: start;
         }
         .sticky-text-panel {
             position: sticky;
-            top: 20vh;
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            top: 25vh;
+            height: 50vh;
         }
         .sticky-text-content {
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.4s ease-in-out;
             position: absolute;
+            visibility: hidden;
         }
         .sticky-text-content.is-active {
             opacity: 1;
+            visibility: visible;
         }
         .sticky-viz-panel .viz-step {
-            min-height: 80vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .brain-svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+        .brain-path {
+            fill: #e0f2fe;
+            stroke: #bae6fd;
+            stroke-width: 2;
+        }
+        .accordion-item {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .accordion-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .accordion-arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -155,63 +154,108 @@
                 </div>
                 <div class="sticky-viz-panel">
                     <div class="viz-step" data-step="1">
-                        <img src="https://placehold.co/500x400/e0f2fe/0ea5e9?text=%D7%92%D7%99%D7%A8%D7%95%D7%99-%D7%A2%D7%9C" alt="איור של מוח מוצף בגירויים דיגיטליים" class="rounded-lg shadow-lg">
+                        <div class="w-full max-w-md">
+                            <svg id="brain-viz" viewBox="0 0 200 200" class="brain-svg">
+                                <path class="brain-path" d="M100,5 C150,5 195,50 195,100 C195,150 150,195 100,195 C50,195 5,150 5,100 C5,50 50,5 100,5 Z" />
+                                <g id="stimuli-group"></g>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="viz-step" data-step="2">
-                        <img src="https://placehold.co/500x400/e0f2fe/0ea5e9?text=%D7%93%D7%A1%D7%A0%D7%A1%D7%99%D7%98%D7%99%D7%96%D7%A6%D7%99%D7%94" alt="איור של קולטני דופמין פוחתים" class="rounded-lg shadow-lg">
-                    </div>
-                    <div class="viz-step" data-step="3">
-                        <img src="https://placehold.co/500x400/e0f2fe/0ea5e9?text=%D7%A1%D7%A0%D7%A1%D7%99%D7%98%D7%99%D7%96%D7%A6%D7%99%D7%94" alt="איור של מסלול עצבי מודגש במוח" class="rounded-lg shadow-lg">
-                    </div>
-                    <div class="viz-step" data-step="4">
-                        <img src="https://placehold.co/500x400/e0f2fe/0ea5e9?text=%D7%94%D7%99%D7%A4%D7%95%D7%A4%D7%A8%D7%95%D7%A0%D7%98%D7%9C%D7%99%D7%95%D7%AA" alt="איור של אונה קדמית חלשה לעומת מערכת לימבית חזקה" class="rounded-lg shadow-lg">
-                    </div>
+                    <div class="viz-step" data-step="2"></div>
+                    <div class="viz-step" data-step="3"></div>
+                    <div class="viz-step" data-step="4"></div>
                 </div>
             </div>
         </section>
-
+        
         <section class="section" id="protocol-section">
             <div class="max-w-4xl mx-auto w-full">
                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">מפת הדרכים: המסע לשינוי</h2>
-                <div class="flex justify-center flex-wrap gap-4 bg-slate-100 p-2 rounded-full mb-8 step">
-                    <div id="tab-phase1" class="protocol-tab active">שלב 1: יצירת מרחב</div>
-                    <div id="tab-phase2" class="protocol-tab">שלב 2: בנייה מחדש</div>
-                    <div id="tab-phase3" class="protocol-tab">שלב 3: צמיחה</div>
-                </div>
-
-                <div id="content-phase1" class="protocol-content active step">
-                    <div class="card p-8">
-                        <h3 class="text-2xl font-bold text-slate-800">שלב 1: יצירת מרחב (ימים 1-30)</h3>
-                        <p class="text-slate-500 mt-2 mb-6"><strong>המטרה:</strong> לאפשר למערכת העצבית מנוחה והתחלה של איזון טבעי.</p>
-                        <ul class="space-y-4 text-slate-600">
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">1</span><span><strong>הפסקה מוחלטת:</strong> הימנעות מכל גירוי מיני מלאכותי (פורנו ותחליפים) כדי לאפשר למוח "לנשום". זהו הצעד הקריטי ביותר.</span></li>
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">2</span><span><strong>שינוי הרגלים:</strong> יצירת סביבה תומכת, כמו הוצאת מסכים מחדר השינה והתקנת חוסמי אתרים.</span></li>
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">3</span><span><strong>קבלת תסמיני הגמילה:</strong> הבנה שתחושות כמו ערפל מוחי, עצבנות וחרדה הן חלק טבעי וזמני מתהליך הריפוי של המוח.</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="content-phase2" class="protocol-content step">
-                    <div class="card p-8">
-                        <h3 class="text-2xl font-bold text-slate-800">שלב 2: בנייה מחדש (ימים 31-90)</h3>
-                        <p class="text-slate-500 mt-2 mb-6"><strong>המטרה:</strong> לבנות באופן פעיל מסלולים עצביים חדשים ובריאים שיחליפו את הישנים.</p>
-                        <ul class="space-y-4 text-slate-600">
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">1</span><span><strong>פעילות גופנית:</strong> הדרך היעילה ביותר לאזן את כימיית המוח באופן טבעי ולהפחית תשוקות.</span></li>
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">2</span><span><strong>תרגול מיינדפולנס:</strong> 10 דקות של מדיטציה ביום מחזקות את האונה הקדמית, האחראית על שליטה עצמית וויסות רגשי.</span></li>
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">3</span><span><strong>התמודדות עם ה-"Flatline":</strong> קבלת התקופה של ירידה בחשק המיני כשלב ריפוי הכרחי, לא כבעיה. זהו סימן שהמערכת מכיילת את עצמה מחדש.</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="content-phase3" class="protocol-content step">
-                    <div class="card p-8">
-                        <h3 class="text-2xl font-bold text-slate-800">שלב 3: צמיחה (ימים 90+)</h3>
-                        <p class="text-slate-500 mt-2 mb-6"><strong>המטרה:</strong> להפוך את השינוי לחלק טבעי מאורח החיים ולבנות חוסן לטווח הארוך.</p>
-                        <ul class="space-y-4 text-slate-600">
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">1</span><span><strong>מציאת משמעות:</strong> הפניית האנרגיה שהתפנתה לתחביבים, פרויקטים ומטרות שמעניקים סיפוק עמוק ובר-קיימא.</span></li>
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">2</span><span><strong>העמקת קשרים:</strong> השקעה במערכות יחסים אמיתיות המבוססות על חיבור, אינטימיות ופגיעות, לא על גירוי.</span></li>
-                            <li class="flex items-start"><span class="text-sky-500 font-bold mr-3 mt-1">3</span><span><strong>חוסן וחמלה:</strong> הבנה שנפילות הן חלק מהדרך. המפתח הוא ללמוד מהן, לסלוח לעצמך, ולהמשיך קדימה במסע.</span></li>
-                        </ul>
+                <div class="card p-8 step">
+                    <div class="accordion">
+                        <!-- Accordion Item 1 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="text-2xl font-bold text-slate-800">שלב 1: יצירת מרחב (ימים 1-30)</span>
+                                <svg class="accordion-arrow w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="pt-4 pb-8 space-y-6">
+                                    <p><strong>המטרה:</strong> לאפשר למערכת העצבית מנוחה והתחלה של איזון טבעי. זהו שלב של ניקוי רעשים ויצירת בסיס יציב להמשך.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>ניתוק מוחלט מהמקור:</strong> הסרת כל תוכן, התקנת חוסמים. אפס סובלנות.</li>
+                                            <li><strong>שבירת התניות סביבתיות:</strong> אין מסכים בחדר השינה. שינוי סידור החדר.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: תסמיני גמילה</h4>
+                                        <p class="mt-2 text-slate-600">צפה לערפל מוחי, עצבנות, חרדה וקשיי שינה. זו תגובה כימית נורמלית וזמנית. התמודד איתה בעזרת שינה מסודרת, שתיית מים, והליכות קצרות.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-500">ההישג: בהירות ראשונית</h4>
+                                        <p class="mt-2 text-slate-600">בסוף שלב זה, תתחיל לחוות רגעים של שקט מנטלי. התשוקות עדיין קיימות, אך ה"רעש" הכללי יורד, ואתה מתחיל להרגיש שאתה חוזר לשלוט בהגה.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Accordion Item 2 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="text-2xl font-bold text-slate-800">שלב 2: בנייה מחדש (ימים 31-90)</span>
+                                <svg class="accordion-arrow w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                               <div class="pt-4 pb-8 space-y-6">
+                                    <p><strong>המטרה:</strong> לבנות באופן פעיל מסלולים נוירולוגיים חדשים ובריאים שיספקו תגמול טבעי ויחליפו את התלות בגירוי המלאכותי.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>פעילות גופנית אינטנסיבית:</strong> 3-4 אימונים בשבוע. הדרך היעילה ביותר לאיזון דופמין טבעי.</li>
+                                            <li><strong>תרגול מיינדפולנס:</strong> 10 דקות מדיטציה ביום לחיזוק השליטה העצמית.</li>
+                                            <li><strong>חשיפה חברתית מבוקרת:</strong> יצירת קשרים אמיתיים, גם אם זה מתחיל בקטן.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: ה-"Flatline"</h4>
+                                        <p class="mt-2 text-slate-600">תקופה של ירידה דרמטית בחשק המיני. זהו לא נזק, אלא <strong class="text-emerald-500">סימן ריפוי קריטי</strong>. המוח מכייל מחדש את המערכת המינית. קבל את התקופה הזו בסבלנות.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-500">ההישג: חיוניות חוזרת</h4>
+                                        <p class="mt-2 text-slate-600">האנרגיה הכללית עולה. המוטיבציה לפעילויות יומיומיות חוזרת. המשיכה המינית מתחילה להתעורר מחדש, הפעם כלפי אנשים אמיתיים.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Accordion Item 3 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="text-2xl font-bold text-slate-800">שלב 3: צמיחה (ימים 90+)</span>
+                                <svg class="accordion-arrow w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="pt-4 pb-8 space-y-6">
+                                    <p><strong>המטרה:</strong> להפוך את השינוי לחלק טבעי מאורח החיים ולבנות חוסן מנטלי ורגשי לטווח הארוך.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>מציאת משמעות:</strong> הפניית האנרגיה לתחביבים, פרויקטים ומטרות שמעניקים סיפוק עמוק.</li>
+                                            <li><strong>העמקת קשרים:</strong> השקעה במערכות יחסים המבוססות על חיבור ואינטימיות.</li>
+                                            <li><strong>בניית חוסן מול נפילות:</strong> הבנה שנפילה אינה כישלון, אלא הזדמנות ללמוד ולהתאים את המערכת.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: שאננות</h4>
+                                        <p class="mt-2 text-slate-600">לאחר תקופה טובה, קל לחזור להרגלים ישנים. המפתח הוא להישאר מודע, להמשיך בתרגול, ולא לקחת את ההתקדמות כמובנת מאליה.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-500">ההישג: חופש אמיתי</h4>
+                                        <p class="mt-2 text-slate-600">השליטה חוזרת לידיים שלך. אתה כבר לא מונע על ידי דחפים, אלא על ידי ערכים ומטרות. זוהי תחושה של חופש פנימי ויציבות.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -254,7 +298,65 @@
         // --- Sticky Scrollytelling for Mechanism Section ---
         const textSteps = gsap.utils.toArray('.sticky-text-content');
         const vizSteps = gsap.utils.toArray('.viz-step');
+        const brainViz = document.getElementById('brain-viz');
+        const stimuliGroup = document.getElementById('stimuli-group');
 
+        // Animation Timeline
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".sticky-container",
+                start: "top top",
+                end: "+=300%",
+                scrub: true,
+                pin: true,
+            }
+        });
+
+        // Step 1 Animation
+        tl.to({}, {}, 0); // Placeholder for start
+        tl.call(() => {
+            stimuliGroup.innerHTML = '';
+            for (let i = 0; i < 20; i++) {
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute('r', 2);
+                circle.setAttribute('fill', '#0ea5e9');
+                stimuliGroup.appendChild(circle);
+                gsap.fromTo(circle, 
+                    { x: Math.random() * 200 - 50, y: Math.random() * 200 - 50, opacity: 0 },
+                    { x: 100, y: 100, opacity: 1, duration: 1 + Math.random() }
+                );
+            }
+        }, [], ">");
+
+        // Step 2 Animation
+        tl.to('.brain-path', { fill: '#f0f9ff', duration: 1 }, '+=1');
+
+        // Step 3 Animation
+        tl.to({}, {}, '+=1');
+        tl.call(() => {
+            stimuliGroup.innerHTML = '';
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute('d', "M50,100 Q100,50 150,100");
+            path.setAttribute('stroke', '#f59e0b');
+            path.setAttribute('stroke-width', '4');
+            path.setAttribute('fill', 'none');
+            path.style.strokeDasharray = 200;
+            path.style.strokeDashoffset = 200;
+            stimuliGroup.appendChild(path);
+            gsap.to(path.style, { strokeDashoffset: 0, duration: 2 });
+        }, [], ">");
+
+        // Step 4 Animation
+        tl.to({}, {}, '+=1');
+        tl.call(() => {
+             const pfc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+             pfc.setAttribute('d', "M100,5 C130,5 155,20 165,45 L100,45 Z");
+             pfc.setAttribute('fill', '#e2e8f0');
+             stimuliGroup.appendChild(pfc);
+             gsap.to(pfc, { opacity: 0.5, duration: 1 });
+        }, [], ">");
+
+        // Text switching logic
         vizSteps.forEach((step, i) => {
             ScrollTrigger.create({
                 trigger: step,
@@ -263,56 +365,29 @@
                 onToggle: self => {
                     if (self.isActive) {
                         textSteps.forEach(text => text.classList.remove('is-active'));
-                        textSteps[i].classList.add('is-active');
+                        if(textSteps[i]) textSteps[i].classList.add('is-active');
                     }
                 }
             });
         });
 
-        // --- Protocol Tabs ---
-        const tabs = document.querySelectorAll('.protocol-tab');
-        const contents = document.querySelectorAll('.protocol-content');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetId = tab.id.replace('tab-', 'content-');
-                
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                contents.forEach(c => {
-                    if (c.id === targetId) {
-                        c.classList.add('active');
-                        gsap.fromTo(c, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.5, ease: 'power2.out'});
-                    } else {
-                        c.classList.remove('active');
-                    }
+        // --- Accordion Logic ---
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            const content = item.querySelector('.accordion-content');
+            header.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                accordionItems.forEach(i => {
+                    i.classList.remove('open');
+                    i.querySelector('.accordion-content').style.maxHeight = '0px';
                 });
+                if (!isOpen) {
+                    item.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
             });
         });
-
-        // --- Chart.js Configuration ---
-        const tooltipTitleCallback = (tooltipItems) => {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            return Array.isArray(label) ? label.join(' ') : label;
-        };
-        
-        const defaultChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { labels: { color: '#475569', font: { family: "'Heebo', sans-serif", size: 14 } } },
-                tooltip: {
-                    callbacks: { title: tooltipTitleCallback },
-                    bodyFont: { family: "'Heebo', sans-serif" },
-                    titleFont: { family: "'Heebo', sans-serif" }
-                }
-            }
-        };
-
-        // --- Damage Chart (placeholder) ---
-        // This can be replaced with a real chart if needed.
-        // For now, the scrollytelling section serves as the main visual for this part.
 
         // --- Upgrade Chart (Radar) ---
         const upgradeCtx = document.getElementById('upgradeChart').getContext('2d');
@@ -328,13 +403,23 @@
                     pointBackgroundColor: '#0ea5e9'
                 }, {
                     label: 'לאחר התהליך',
-                    data: [3, 2, 2, 4, 1], // Start with same data
+                    data: [3, 2, 2, 4, 1], 
                     backgroundColor: 'rgba(16, 185, 129, 0.2)',
                     borderColor: '#10b981',
                     pointBackgroundColor: '#10b981'
                 }]
             },
-            options: { ...defaultChartOptions,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#475569', font: { family: "'Heebo', sans-serif", size: 14 } } },
+                    tooltip: {
+                        callbacks: { title: (tooltipItems) => Array.isArray(tooltipItems[0].label) ? tooltipItems[0].label.join(' ') : tooltipItems[0].label },
+                        bodyFont: { family: "'Heebo', sans-serif" },
+                        titleFont: { family: "'Heebo', sans-serif" }
+                    }
+                },
                 scales: {
                     r: {
                         angleLines: { color: '#cbd5e1' },
@@ -348,27 +433,27 @@
             }
         });
         
-        // --- Animate Radar Chart on Scroll ---
         const initialData = [3, 2, 2, 4, 1];
         const targetData = [9, 8, 9, 8, 8];
-        const radarAnimation = gsap.from(upgradeChart.data.datasets[1].data, {
-            ...Object.fromEntries(initialData.map((val, i) => [i, val])),
-            duration: 1.5,
-            ease: "power2.inOut",
-            paused: true,
-            onUpdate: () => upgradeChart.update()
-        });
         
         ScrollTrigger.create({
             trigger: "#upgrade-section",
             start: "top 60%",
             onEnter: () => {
-                upgradeChart.data.datasets[1].data = [...targetData];
-                radarAnimation.play(0);
+                gsap.to(upgradeChart.data.datasets[1].data, {
+                    ...Object.fromEntries(targetData.map((val, i) => [i, val])),
+                    duration: 1.5,
+                    ease: "power2.inOut",
+                    onUpdate: () => upgradeChart.update()
+                });
             },
             onLeaveBack: () => {
-                upgradeChart.data.datasets[1].data = [...initialData];
-                upgradeChart.update();
+                gsap.to(upgradeChart.data.datasets[1].data, {
+                    ...Object.fromEntries(initialData.map((val, i) => [i, val])),
+                    duration: 0.5,
+                    ease: "power2.out",
+                    onUpdate: () => upgradeChart.update()
+                });
             }
         });
     });

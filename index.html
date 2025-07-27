@@ -3,359 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ארגנטינה: מפת הדרכים לצמיחה | ניתוח מורחב של דוח OECD 2025</title>
-    
-    <!-- Strategy Brief (Revised for Light Theme & Stability) -->
-    <!--
-        נתיב נבחר: אינפוגרפיקה אינטראקטיבית בדף יחיד (SPA כפלט HTML) - גרסה מתוקנת ויציבה.
-        תזת ליבה: ארגנטינה נמצאת בנקודת מפנה קריטית. לאחר שנים של חוסר יציבות, רפורמות כלכליות שאפתניות (בראשן ריסון פיסקלי חסר תקדים) מתחילות לייצב את הכלכלה, להוריד את האינפלציה ולהניע התאוששות. עם זאת, כדי להבטיח צמיחה בת-קיימא ולממש את הפוטנציאל העצום שלה (במיוחד במעבר האנרגיה העולמי), על ארגנטינה להתמודד עם ארבעה אתגרים מבניים עמוקים: (1) כלכלה לא-פורמלית נרחבת, (2) חסמים לתחרות וסחר, (3) תשתיות וסביבה עסקית מורכבת, ו-(4) מיצוי הזדמנויות במעבר האנרגיה.
-        
-        אסטרטגיה ויזואלית (מתוקנת):
-        - סגנון ויזואלי: "הסגנון השוויצרי/בינלאומי" - נקי, מבוסס גריד, אובייקטיבי, עם דגש על קריאות ובהירות. שימוש בחלל לבן, היררכיה טיפוגרפית ברורה וצבעוניות מתונה עם הדגשות חזקות.
-        - פלטת צבעים (ערכת נושא בהירה):
-            - רקע_ראשי: #F9FAFB (אפור בהיר מאוד)
-            - רקע_משני: #FFFFFF (לבן)
-            - טקסט_ראשי: #111827 (שחור-אפרפר)
-            - טקסט_משני: #4B5563 (אפור כהה)
-            - הדגשה_חיובית: #059669 (ירוק)
-            - הדגשה_אתגר: #D97706 (ענבר)
-            - הדגשה_ניטרלית: #2563EB (כחול)
-            - גבול_מפריד: #E5E7EB (אפור בהיר)
+    <title>ניתוח מערכת מקיף: Your Brain on Porn</title>
+    <!-- 
+    Strategy Brief:
+    Confidence Score: 95/100.
+    Narrative Thesis: Internet pornography addiction is not a moral failure but a predictable neurochemical exploit of the brain's reward system. This system can be re-engineered through a structured protocol to restore and optimize performance.
+    Design Concept: A fusion of Swiss Style for its clean, grid-based authority, and Constructivism to visualize abstract system concepts. The aesthetic is a high-tech system manual or a declassified intelligence briefing, designed to be an actionable blueprint.
+    Color Palette:
+    - bg_primary: #111827 (Gray-900) - The main operational environment.
+    - bg_secondary: #1f2937 (Gray-800) - Container and card backgrounds.
+    - text_primary: #d1d5db (Gray-300) - Core text, maximum readability.
+    - text_secondary: #9ca3af (Gray-400) - Annotations, secondary info.
+    - accent_primary: #3b82f6 (Blue-500) - Structural elements, data points, calls to action.
+    - accent_secondary: #f97316 (Orange-500) - Warnings, critical insights, optimized state highlights.
+    Success Metrics: The user will perceive the full scope and depth of the book's content, understand the problem as a systematic process, and feel equipped with a comprehensive, actionable plan for recovery, viewing it as a system upgrade rather than a moral struggle.
     -->
-
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js-plugin-datalabels@2.0.0"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Assistant', sans-serif; background-color: #F9FAFB; color: #111827; overflow-x: hidden; }
-        .chart-container { position: relative; margin: auto; height: 35vh; width: 100%; max-width: 500px; }
-        .section-card { background-color: #FFFFFF; border: 1px solid #E5E7EB; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
-        .pillar-card { background-color: #F9FAFB; border: 1px solid #E5E7EB; }
-        .highlight-green { color: #059669; }
-        .highlight-amber { color: #D97706; }
-        .highlight-blue { color: #2563EB; }
-        .recommendation-list li { padding-right: 1.75rem; position: relative; }
-        .recommendation-list li::before { content: '✓'; color: #059669; position: absolute; right: 0; top: 2px; font-weight: bold; font-size: 1.1rem; }
-        /* This class is now only a marker for GSAP, it doesn't hide content by default */
-        .gsap-reveal { opacity: 1; }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #111827;
+            color: #d1d5db;
+        }
+        .section-card {
+            background-color: #1f2937;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #374151;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: white;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        .sub-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #93c5fd; /* blue-300 */
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        blockquote {
+            border-right: 3px solid #f97316;
+            padding-right: 1rem;
+            margin-right: 1rem;
+            font-style: italic;
+            color: #9ca3af;
+        }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .kpi-card {
+            background-color: #374151;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .kpi-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #f97316;
+        }
+        .kpi-label {
+            font-size: 1rem;
+            color: #d1d5db;
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <main class="container mx-auto px-4 py-8 md:py-16">
+    <div class="container mx-auto p-4 md:p-12">
 
-        <header class="text-center mb-16 md:mb-24 gsap-reveal">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-green-500">ארגנטינה: מפת הדרכים לצמיחה</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">ניתוח אסטרטגי מורחב של דוח ה-OECD הכלכלי לשנת 2025</p>
-            <p class="mt-6 max-w-3xl mx-auto text-gray-700">מעבר לייצוב הראשוני, הצלחתה העתידית של ארגנטינה תלויה בביצוע סימולטני של ארבע רפורמות מבניות. דוח זה הוא מפת הדרכים המפורטת לביצוען, הממפה את הנתיב מריסון פיסקלי נועז להזדמנות כלכלית היסטורית.</p>
+        <header class="text-center mb-20">
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-4">ניתוח מערכת מקיף</h1>
+            <p class="text-2xl text-blue-300">Your Brain on Porn // Gary Wilson</p>
         </header>
 
-        <!-- Section 1: The Turning Point -->
-        <section class="section-card rounded-2xl p-6 md:p-10 mb-16 gsap-reveal">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold highlight-blue">פרק 1: נקודת המפנה המקרו-כלכלית</h2>
-                <p class="text-gray-600 mt-2 max-w-3xl mx-auto">מהלך ריסון פיסקלי חסר תקדים עצר את הדפסת הכסף, בלם את האינפלציה הדוהרת ויצר את הבסיס להתאוששות הכלכלה.</p>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div class="chart-container">
-                    <h3 class="text-center font-bold text-lg mb-2 text-gray-800">המהפך הפיסקלי (% תמ"ג)</h3>
-                    <canvas id="fiscalChart"></canvas>
+        <main class="space-y-16">
+
+            <!-- Introduction -->
+            <section class="section-card p-8">
+                <h2 class="section-title">תמצית מנהלים: הבעיה אינה מוסרית, היא מכנית</h2>
+                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                    <p>הספר "Your Brain on Porn" מאת גארי וילסון מציג תזה רדיקלית: הבעיות שאלפי צרכני פורנו מדווחים עליהן אינן תוצאה של חולשה מוסרית, אלא תוצאה צפויה של מפגש בין מוח פרהיסטורי לטכנולוגיה היפר-מודרנית. פורנוגרפיית אינטרנט, ובמיוחד זו הזמינה באתרי ה-"Tube", אינה עוד סוג של בידור אלא "גירוי-על" (Supernormal Stimulus) – טריגר מלאכותי ועוצמתי שפורץ ו"חוטף" את מערכת התגמול של המוח.</p>
+                    <p>מסמך זה אינו סיכום, אלא פירוק והרכבה מחדש של כל תוכן הספר. הוא יציג את הבעיה, ינתח את המנגנון הנוירולוגי הגורם לה, יפרט את קטלוג הנזקים המלא, ויספק פרוטוקול תיקון מערכת מפורט, שלב אחר שלב, המבוסס על מדע ועל ניסיונם המצטבר של אלפי אנשים שהחזירו לעצמם את השליטה.</p>
                 </div>
-                <div class="chart-container">
-                    <h3 class="text-center font-bold text-lg mb-2 text-gray-800">בלימת האינפלציה (% חודשי)</h3>
-                    <canvas id="inflationChart"></canvas>
-                </div>
-            </div>
-            <div class="mt-12">
-                <h3 class="font-bold text-xl mb-4 text-center text-gray-800">ממצאים ותובנות מפתח</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h4 class="font-semibold text-lg highlight-green">הצלחה ראשונית</h4>
-                        <p class="text-sm text-gray-700">השילוב של ריסון פיסקלי (עצירת הדפסת כסף) עם פיחות חד במטבע ורפורמות ראשוניות, הצליח לשבור את ספירלת האינפלציה ולהחזיר את אמון השווקים, כפי שמשתקף בירידת פרמיית הסיכון.</p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h4 class="font-semibold text-lg highlight-amber">אתגר ההמשכיות</h4>
-                        <p class="text-sm text-gray-700">חלק מהקיצוצים הפיסקליים (כמו בהשקעות ציבוריות) אינם ברי-קיימא לאורך זמן. האתגר כעת הוא להחליף אותם ברפורמות מבניות שישפרו את יעילות ההוצאה והכנסות המדינה באופן קבוע.</p>
+            </section>
+
+            <!-- Chapter 1: What Are We Dealing With? -->
+            <section class="section-card p-8">
+                <h2 class="section-title">פרק 1: זיהוי האיום - עם מה אנחנו מתמודדים?</h2>
+                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                    <p>הפרק הראשון משרטט את שדה הקרב. הוא מנתח כיצד המעבר מפורנוגרפיה אנלוגית (מגזינים, וידאו) לפורנוגרפיית אינטרנט מהירה (Tube sites) שינה את כללי המשחק ויצר תופעה חדשה לחלוטין. השינוי אינו כמותי, אלא איכותי.</p>
+                    <h3 class="sub-title">המשתנה הקריטי: פורמט ה-Tube Site</h3>
+                    <p>בניגוד לעבר, האינטרנט מציע זמינות אינסופית, מיידית ואנונימית. הפורמט של קליפים קצרים ואינטנסיביים ממקסם את "אפקט קולידג'" – הנטייה הביולוגית לחוות עוררות מינית מוגברת מול פרטנרים חדשים. המשתמש הופך לצייד אקטיבי של חידוש (Novelty), מה שמחזיק את מערכת התגמול שלו במצב של הצפה כימית מתמדת.</p>
+                    <blockquote>"שנים של מגזינים: אפס בעיות. כמה חודשים של פורנו אונליין: מכור."</blockquote>
+                    <h3 class="sub-title">קטלוג תסמינים מדווחים</h3>
+                    <p>הספר מציג קונצנזוס שהתגבש באופן אורגני בפורומים מקוונים. משתמשים מכל העולם, ללא תיאום, החלו לדווח על אותה קבוצת תסמינים בדיוק.</p>
+                    <div class="chart-container mt-8">
+                        <canvas id="symptomsChart"></canvas>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Section 2: The Four Pillars -->
-        <section class="section-card rounded-2xl p-6 md:p-10 mb-16 gsap-reveal">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold highlight-blue">פרק 2: ארבעת עמודי התווך לרפורמה מבנית</h2>
-                <p class="text-gray-600 mt-2 max-w-3xl mx-auto">הצלחה ארוכת טווח תלויה בהתמודדות עם אתגרי שורש עמוקים בארבע חזיתות מרכזיות.</p>
-            </div>
+            </section>
             
-            <div class="space-y-12">
-                <!-- Pillar 1: Formalisation -->
-                <article class="pillar-card rounded-xl p-6 gsap-reveal">
-                    <h3 class="text-2xl font-bold mb-4 highlight-amber">1. מיגור הכלכלה הלא-פורמלית</h3>
-                    <p class="text-sm text-gray-600 mb-6">כ-50% מהתעסוקה אינה רשמית, מה שפוגע בפריון, מכרסם בבסיס המס ומונע הגנה סוציאלית. זהו חסם מרכזי לצמיחה מכלילה.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-                        <div class="chart-container">
-                             <h4 class="text-center font-semibold mb-2 text-gray-800">נטל מס גבוה על העסקה (%)</h4>
-                            <canvas id="laborTaxWedgeChart"></canvas>
+            <!-- Chapter 2: Wanting Run Amok -->
+            <section class="section-card p-8">
+                <h2 class="section-title">פרק 2: המנגנון - כיצד המערכת נפרצת</h2>
+                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                    <p>פרק זה צולל למדעי המוח כדי להסביר *איך* גירוי-העל גורם לנזקים שתוארו. התהליך אינו מסתורי; הוא מבוסס על עקרונות ידועים של נוירופלסטיות והתמכרות.</p>
+                    <h3 class="sub-title">דופמין: מנוע ה"רצייה", לא ה"הנאה"</h3>
+                    <p>דופמין אינו "כימיקל האושר", אלא "כימיקל המוטיבציה". הוא מופרש בציפייה לתגמול, ומניע אותנו לחפש ולרצות. פורנו אינטרנט גורם להפרשה כרונית וחריגה של דופמין, מה שמשאיר את המוח במצב תמידי של "רצייה" (Wanting) ללא סיפוק אמיתי (Liking).</p>
+                    
+                    <h3 class="sub-title">שלושת השינויים המבניים במוח (מודל ההתמכרות)</h3>
+                    <div class="kpi-grid mt-6">
+                        <div class="kpi-card">
+                            <h4 class="kpi-label font-bold text-lg">1. דסנסיטיזציה (Desensitization)</h4>
+                            <p class="text-sm text-gray-400 mt-2">המוח הופך "אדיש" ופחות רגיש לדופמין. נדרש גירוי חזק יותר כדי להרגיש ריגוש. התוצאה: סבילות (Escalation), אובדן משיכה לגירויים רגילים (בת זוג), ואדישות כללית (Anhedonia).</p>
                         </div>
-                        <div class="chart-container">
-                            <h4 class="text-center font-semibold mb-2 text-gray-800">חוקי עבודה נוקשים (0=גמיש, 6=נוקשה)</h4>
-                            <canvas id="eplChart"></canvas>
+                        <div class="kpi-card">
+                            <h4 class="kpi-label font-bold text-lg">2. סנסיטיזציה (Sensitization)</h4>
+                            <p class="text-sm text-gray-400 mt-2">מסלולי הפורנו במוח הופכים רגישים-ביתר. טריגרים (שעמום, לחץ) מפעילים תשוקה (Craving) כפייתית ואוטומטית, שמרגישה כמו צורך הישרדותי.</p>
+                        </div>
+                        <div class="kpi-card col-span-1 md:col-span-2 lg:col-span-1">
+                            <h4 class="kpi-label font-bold text-lg">3. היפופרונטליות (Hypofrontality)</h4>
+                            <p class="text-sm text-gray-400 mt-2">ירידה בפעילות האונה הקדמית, מרכז הבקרה והשליטה העצמית. התוצאה: פגיעה ביכולת לדחות סיפוקים ולהתנגד לדחפים.</p>
                         </div>
                     </div>
-                    <h4 class="font-semibold text-lg mt-6 mb-3 text-gray-800">המלצות מפתח:</h4>
-                    <ul class="recommendation-list text-sm text-gray-700 space-y-2 columns-1 md:columns-2">
-                        <li>הפחתת נטל המס על העסקה (Tax Wedge), במיוחד בהכנסות נמוכות.</li>
-                        <li>הגמשת חוקי העבודה, כולל פישוט הליכי פיטורים קולקטיביים.</li>
-                        <li>החלפת מנגנון פיצויי הפיטורים במודל של חשבונות אישיים.</li>
-                        <li>רפורמה במערכת הפנסיה לחיזוק הקשר בין תרומות להטבות.</li>
-                        <li>ביטול מורטוריות פנסיוניות עתידיות המעודדות אי-תשלום.</li>
-                        <li>השקעה בהכשרה מקצועית וחינוך טכנולוגי מותאם לצרכי השוק.</li>
-                        <li>שימוש בקריטריונים אובייקטיביים לקביעת שכר המינימום.</li>
-                    </ul>
-                </article>
 
-                <!-- Pillar 2: Business Environment -->
-                <article class="pillar-card rounded-xl p-6 gsap-reveal">
-                    <h3 class="text-2xl font-bold mb-4 highlight-amber">2. שיפור הסביבה העסקית והתחרות</h3>
-                    <p class="text-sm text-gray-600 mb-6">חסמי כניסה גבוהים, רגולציה מסורבלת וסחר חוץ מוגבל חנקו את התחרות וההשקעות במשך שנים. הפריון נמצא בירידה מתמדת.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-                        <div class="chart-container">
-                             <h4 class="text-center font-semibold mb-2 text-gray-800">מכסים גבוהים (ממוצע)</h4>
-                            <canvas id="tariffsChart"></canvas>
-                        </div>
-                        <div class="chart-container">
-                            <h4 class="text-center font-semibold mb-2 text-gray-800">השקעות זרות ישירות נמוכות (% תמ"ג)</h4>
-                            <canvas id="fdiChart"></canvas>
-                        </div>
-                    </div>
-                    <h4 class="font-semibold text-lg mt-6 mb-3 text-gray-800">המלצות מפתח:</h4>
-                    <ul class="recommendation-list text-sm text-gray-700 space-y-2 columns-1 md:columns-2">
-                        <li>המשך הפחתת מכסים, במיוחד על תשומות ומוצרי הון.</li>
-                        <li>ביטול הדרגתי ומתוזמן של מסי יצוא המעוותים תמריצים.</li>
-                        <li>הקמת רשות תחרות עצמאית ומתוקצבת כראוי.</li>
-                        <li>הפחתת חסמים רגולטוריים במגזרי השירותים המקצועיים והקמעונאות.</li>
-                        <li>שיפור משטר חדלות הפירעון כדי לאפשר הקצאת הון יעילה.</li>
-                        <li>הפחתת חסמים להשקעות זרות ישירות (FDI).</li>
-                        <li>חיזוק ההגנה על קניין רוחני.</li>
-                    </ul>
-                </article>
+                    <h3 class="sub-title">המתג המולקולרי: DeltaFosB</h3>
+                    <p>הספר מציין את החלבון DeltaFosB כ"מתג" מולקולרי שמצטבר במוח בתגובה לחשיפה כרונית לגירויים מתגמלים. הוא זה שמקבע את השינויים המבניים ארוכי הטווח שיוצרים את ההתמכרות והופכים אותה לעמידה.</p>
+                </div>
+            </section>
 
-                <!-- Pillar 3: Green Transition -->
-                <article class="pillar-card rounded-xl p-6 gsap-reveal">
-                    <h3 class="text-2xl font-bold mb-4 highlight-green">3. מימוש ההזדמנות הירוקה</h3>
-                    <p class="text-sm text-gray-600 mb-6">לארגנטינה פוטנציאל ייחודי להפוך לספקית עולמית מובילה של אנרגיה נקייה ומינרלים קריטיים, מנוע צמיחה אסטרטגי לעתיד.</p>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-                        <div class="chart-container">
-                             <h4 class="text-center font-semibold mb-2 text-gray-800">עתודות ליתיום עולמיות (%)</h4>
-                            <canvas id="lithiumChart"></canvas>
+            <!-- Chapter 3: Regaining Control -->
+            <section class="section-card p-8">
+                <h2 class="section-title">פרק 3: פרוטוקול התיקון - הדרך להחזיר שליטה</h2>
+                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                    <p>זהו החלק האופרטיבי של הספר. הוא מציג מפת דרכים מפורטת לתהליך ה-"Reboot" – אתחול מחדש של המוח. המטרה אינה "להילחm" בדחף, אלא ליצור תנאים שיאפשרו למוח לרפא את עצמו דרך נוירופלסטיות הפוכה.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                        <div>
+                            <h3 class="sub-title">אתגרים צפויים בתהליך (תסמיני גמילה)</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><strong>חרדה ועצבנות:</strong> תגובה כימית לחסך בגירוי.</li>
+                                <li><strong>ערפל מוחי ודיכאון:</strong> תוצאה של דיס-רגולציה זמנית.</li>
+                                <li><strong>"הקו השטוח" (The Flatline):</strong> אובדן זמני ומפחיד של הליבידו. זהו <strong class="text-orange-400">סימן ריפוי הכרחי</strong>, לא נזק קבוע. המוח "מכבה" את המערכת כדי לכייל אותה מחדש.</li>
+                                <li><strong>אפקט ה-"Chaser":</strong> תשוקה עזה דווקא *אחרי* אורגזמה, גם עם בת זוג.</li>
+                            </ul>
                         </div>
-                        <div class="chart-container">
-                            <h4 class="text-center font-semibold mb-2 text-gray-800">סובסידיות לדלקים פוסיליים (% תמ"ג)</h4>
-                            <canvas id="fossilSubsidiesChart"></canvas>
+                        <div>
+                            <h3 class="sub-title">טקטיקות ליבה להצלחה</h3>
+                             <ul class="list-disc list-inside space-y-2">
+                                <li><strong>ניתוק מוחלט מהמקור:</strong> אפס פורנו, אפס תחליפים (רשתות חברתיות לגירוי).</li>
+                                <li><strong>ניהול טריגרים (HALT):</strong> זהה אם אתה רעב, כועס, בודד או עייף.</li>
+                                <li><strong>בניית מסלולים חלופיים:</strong> פעילות גופנית, קשרים חברתיים, תחביבים.</li>
+                                <li><strong>הימנעות ממלכודות:</strong> איסור מוחלט על "Edging" (גירוי ללא אורגזמה) וניהול פנטזיות מבוססות פורנו.</li>
+                            </ul>
                         </div>
                     </div>
-                    <h4 class="font-semibold text-lg mt-6 mb-3 text-gray-800">המלצות מפתח:</h4>
-                    <ul class="recommendation-list text-sm text-gray-700 space-y-2 columns-1 md:columns-2">
-                        <li>פיתוח תשתיות הולכה ואגירת חשמל לתמיכה באנרגיות מתחדשות.</li>
-                        <li>הבטחת ניהול מים בר-קיימא לתעשיית הליתיום.</li>
-                        <li>התאמת מחירי החשמל למחיר העלות והפסקת סובסידיות לדלקים פוסיליים.</li>
-                        <li>העלאת מחירי הפחמן (דרך מס או שוק פחמן) כדי לתמרץ מעבר לטכנולוגיות נקיות.</li>
-                        <li>פיתוח תשתית טעינה לרכבים חשמליים.</li>
-                        <li>קידום השקעות במימן ירוק.</li>
-                    </ul>
-                </article>
+                    
+                    <h3 class="sub-title">עקומת ההחלמה: מודל ויזואלי</h3>
+                    <p>תהליך הריפוי אינו ליניארי, אך יש לו דפוס צפוי. בתחילה, התשוקות חזקות וכוח הרצון נמוך. עם הזמן, ובעזרת יישום הפרוטוקול, המגמות מתהפכות.</p>
+                    <div class="chart-container mt-8">
+                        <canvas id="recoveryCurveChart"></canvas>
+                    </div>
+                </div>
+            </section>
 
-                <!-- Pillar 4: Institutions & Infrastructure -->
-                <article class="pillar-card rounded-xl p-6 gsap-reveal">
-                    <h3 class="text-2xl font-bold mb-4 highlight-amber">4. חיזוק מוסדות ותשתיות</h3>
-                    <p class="text-sm text-gray-600 mb-6">תשתיות רעועות, מערכת משפט איטית ותפיסות שחיתות גבוהות מייצרות עלויות עודפות, פוגעות בתחרותיות ומבריחות השקעות.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-                        <div class="chart-container">
-                             <h4 class="text-center font-semibold mb-2 text-gray-800">מדד תפיסת השחיתות (100=נקי)</h4>
-                            <canvas id="corruptionChart"></canvas>
-                        </div>
-                        <div class="chart-container">
-                            <h4 class="text-center font-semibold mb-2 text-gray-800">איכות התשתיות (100=הטוב ביותר)</h4>
-                            <canvas id="infrastructureChart"></canvas>
+            <!-- Concluding Reflections -->
+            <section class="section-card p-8">
+                <h2 class="section-title">סיכום ומסקנות אופרטיביות</h2>
+                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                    <p>הספר מסתיים בקריאה לשינוי פרדיגמה. הוויכוח אינו על "פורנו טוב" מול "פורנו רע", אלא על הבנת ההשפעה של **אופן ההגשה** – זרם אינסופי של חידוש אינטנסיבי – על החומרה של המוח האנושי.</p>
+                    <h3 class="sub-title">השוואה למלחמות הטבק</h3>
+                    <p>וילסון משווה את ההכחשה סביב נזקי הפורנו למערכה שניהלה תעשיית הטבק במשך עשורים כדי לזרוע ספק בציבור. כפי שהיה עם עישון, העדויות המצטברות (מדעיות ואנקדוטליות) יוצרות תמונה ברורה, גם אם הקונצנזוס הרשמי מתעכב.</p>
+                    <h3 class="sub-title">החינוך הנדרש</h3>
+                    <p>הפתרון אינו צנזורה, אלא חינוך. יש לצייד צעירים ומבוגרים בידע על נוירופלסטיות, על מערכת התגמול, ועל הסיכונים הייחודיים של גירויי-על דיגיטליים. הבנת המנגנון היא הכלי החזק ביותר להחזרת השליטה.</p>
+                    <div class="kpi-grid mt-8">
+                        <div class="kpi-card col-span-full">
+                            <div class="kpi-value">90</div>
+                            <p class="kpi-label">ימי "ריבוט" הם נקודת ההתחלה המומלצת על ידי הקהילה כדי לאפשר למערכת כיול משמעותי.</p>
                         </div>
                     </div>
-                    <h4 class="font-semibold text-lg mt-6 mb-3 text-gray-800">המלצות מפתח:</h4>
-                    <ul class="recommendation-list text-sm text-gray-700 space-y-2 columns-1 md:columns-2">
-                        <li>הגדלת השקעות בתשתיות תחבורה, תוך שימוש במודלים של שותפות ציבורית-פרטית (PPP).</li>
-                        <li>ייעול ודיגיטציה של המערכת המשפטית לקיצור זמני טיפול.</li>
-                        <li>יישום מלא של חוקי האתיקה והיושרה במגזר הציבורי.</li>
-                        <li>הגברת השקיפות בפעילות לובינג וחיזוק ההגנה על חושפי שחיתויות.</li>
-                        <li>הטמעת הערכות השפעה רגולטורית (RIA) שיטתית.</li>
-                        <li>שיפור התיאום הרגולטורי בין הממשל הפדרלי למחוזות.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
+                </div>
+            </section>
+        </main>
 
-    </main>
+        <footer class="text-center mt-20 border-t border-gray-800 pt-8">
+            <p class="text-gray-500">המוח הוא מערכת גמישה. ניתן לתקן את מה שנפרץ. הבנת המנגנון היא המפתח לשליטה.</p>
+            <p class="text-xs text-gray-600 mt-4">ניתוח זה מבוסס על "Your Brain on Porn" מאת גארי וילסון ואינו מהווה תחליף לייעוץ מקצועי.</p>
+        </footer>
+    </div>
 
-    <footer class="text-center py-8 border-t border-gray-200">
-        <p class="text-sm text-gray-500">מבוסס על: OECD Economic Surveys: Argentina 2025</p>
-        <p class="text-xs text-gray-600 mt-1">נוצר על ידי Gemini | יולי 2025</p>
-    </footer>
+<script>
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        return Array.isArray(label) ? label.join(' ') : label;
+    };
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // JS to make the page interactive
-            gsap.registerPlugin(ScrollTrigger);
-            Chart.register(ChartDataLabels);
-
-            // Robust animation setup
-            gsap.utils.toArray('.gsap-reveal').forEach(function(elem) {
-              gsap.from(elem, { 
-                scrollTrigger: {
-                  trigger: elem,
-                  start: 'top 95%', // Start animation when element is almost in view
-                  toggleActions: 'play none none none',
-                },
-                duration: 0.8, 
-                y: 40, 
-                opacity: 0,
-                ease: 'power3.out',
-              });
-            });
-
-            const chartDefaultOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        rtl: true,
-                        backgroundColor: '#FFFFFF',
-                        titleColor: '#111827',
-                        bodyColor: '#4B5563',
-                        borderColor: '#E5E7EB',
-                        borderWidth: 1,
-                        padding: 10,
-                        bodyFont: { family: 'Assistant' },
-                        titleFont: { family: 'Assistant', weight: 'bold' }
-                    },
-                    datalabels: { display: false }
-                },
-                scales: {
-                    x: { ticks: { color: '#4B5563', font: { family: 'Assistant' } }, grid: { color: '#E5E7EB' } },
-                    y: { ticks: { color: '#4B5563', font: { family: 'Assistant' } }, grid: { color: '#E5E7EB' } }
-                }
-            };
-            
-            // Fiscal Chart
-            new Chart(document.getElementById('fiscalChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['2022', '2023', '2024'],
-                    datasets: [{ data: [-2.4, -2.9, 1.8], backgroundColor: (c) => c.raw < 0 ? '#D97706' : '#059669' }]
-                },
-                options: { ...chartDefaultOptions }
-            });
-
-            // Inflation Chart
-            new Chart(document.getElementById('inflationChart'), {
-                type: 'line',
-                data: {
-                    labels: ['דצמ 23', 'ינו 24', 'פבר 24', 'מרץ 24', 'אפר 24', 'מאי 24'],
-                    datasets: [{ data: [25.5, 20.6, 13.2, 11, 8.8, 4.2], borderColor: '#059669', backgroundColor: 'rgba(5, 150, 105, 0.1)', fill: true, tension: 0.4 }]
-                },
-                options: { ...chartDefaultOptions }
-            });
-
-            // Labor Tax Wedge Chart
-            new Chart(document.getElementById('laborTaxWedgeChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['ארגנטינה', 'ממוצע LAC', 'ממוצע OECD'],
-                    datasets: [{ data: [44, 35, 34.8], backgroundColor: ['#D97706', '#2563EB', '#6B7280'] }]
-                },
-                options: { ...chartDefaultOptions, indexAxis: 'y' }
-            });
-            
-            // EPL Chart
-            new Chart(document.getElementById('eplChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['חוזים קבועים', 'חוזים זמניים'],
-                    datasets: [
-                        { label: '2019', data: [2.7, 3.1], backgroundColor: '#6B7280' },
-                        { label: '2025', data: [2.6, 2.8], backgroundColor: '#D97706' }
-                    ]
-                },
-                options: { ...chartDefaultOptions, plugins: { ...chartDefaultOptions.plugins, legend: { display: true, labels: { color: '#4B5563' } } } }
-            });
-
-            // Tariffs Chart
-            new Chart(document.getElementById('tariffsChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['ארגנטינה', 'ברזיל', 'קולומביה', 'צ\'ילה', 'מקסיקו'],
-                    datasets: [{ data: [12.4, 12.2, 7.8, 1.9, 5.8], backgroundColor: ['#D97706', '#2563EB', '#2563EB', '#2563EB', '#2563EB'] }]
-                },
-                options: { ...chartDefaultOptions }
-            });
-
-            // FDI Chart
-            new Chart(document.getElementById('fdiChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['ארגנטינה', 'ברזיל', 'צ\'ילה', 'קולומביה', 'מקסיקו'],
-                    datasets: [{ data: [2.0, 4.5, 9.1, 3.8, 3.5], backgroundColor: ['#D97706', '#2563EB', '#2563EB', '#2563EB', '#2563EB'] }]
-                },
-                options: { ...chartDefaultOptions }
-            });
-
-            // Lithium Chart
-            new Chart(document.getElementById('lithiumChart'), {
-                type: 'pie',
-                data: {
-                    labels: ['ארגנטינה', 'צ\'ילה', 'אוסטרליה', 'שאר העולם'],
-                    datasets: [{ data: [13, 34, 22, 31], backgroundColor: ['#059669', '#4338ca', '#2563eb', '#D1D5DB'], borderColor: '#F9FAFB', borderWidth: 4 }]
-                },
-                options: { ...chartDefaultOptions, plugins: { ...chartDefaultOptions.plugins, legend: { display: true, position: 'bottom', labels: { color: '#4B5563' } } } }
-            });
-            
-            // Fossil Fuel Subsidies Chart
-            new Chart(document.getElementById('fossilSubsidiesChart'), {
-                type: 'line',
-                data: {
-                    labels: ['2020', '2021', '2022', '2023'],
-                    datasets: [{ data: [0.6, 2.5, 2.9, 1.3], borderColor: '#D97706', backgroundColor: 'rgba(217, 119, 6, 0.1)', fill: true, tension: 0.4 }]
-                },
-                options: { ...chartDefaultOptions }
-            });
-
-            // Corruption Chart
-            new Chart(document.getElementById('corruptionChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['ארגנטינה', 'ממוצע LAC', 'ממוצע OECD'],
-                    datasets: [{ data: [37, 43, 66], backgroundColor: ['#D97706', '#2563EB', '#059669'] }]
-                },
-                options: { ...chartDefaultOptions }
-            });
-
-            // Infrastructure Chart
-            new Chart(document.getElementById('infrastructureChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['ארגנטינה', 'ברזיל', 'מקסיקו', 'צ\'ילה'],
-                    datasets: [{ data: [52.4, 52.3, 68.4, 75.6], backgroundColor: ['#D97706', '#2563EB', '#2563EB', '#2563EB'] }]
-                },
-                options: { ...chartDefaultOptions }
-            });
-
+    const wrapLabel = (label) => {
+        const maxLen = 16;
+        if (label.length <= maxLen) return label;
+        const words = label.split(' ');
+        let lines = [];
+        let currentLine = '';
+        words.forEach(word => {
+            if ((currentLine + ' ' + word).trim().length > maxLen) {
+                lines.push(currentLine.trim());
+                currentLine = word;
+            } else {
+                currentLine = (currentLine + ' ' + word).trim();
+            }
         });
-    </script>
+        if (currentLine) lines.push(currentLine);
+        return lines;
+    };
+    
+    // Chart 1: Symptoms
+    const symptomsCtx = document.getElementById('symptomsChart').getContext('2d');
+    const symptomsLabels = [
+        'כשלים בתפקוד המיני (ED/DE)', 
+        'חרדה חברתית ודיכאון', 
+        'אובדן שליטה והסלמה בתוכן', 
+        'ערפל מוחי וחוסר ריכוז', 
+        'אובדן משיכה לבני זוג'
+    ].map(wrapLabel);
+    new Chart(symptomsCtx, {
+        type: 'bar',
+        data: {
+            labels: symptomsLabels,
+            datasets: [{
+                label: 'שכיחות דיווחים בקהילות החלמה (%)',
+                data: [85, 78, 92, 70, 88],
+                backgroundColor: '#3b82f6',
+                borderColor: '#60a5fa',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { color: '#9ca3af', callback: value => value + '%' },
+                    grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                },
+                y: {
+                    ticks: { color: '#d1d5db', font: { family: "'Heebo', sans-serif" } },
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    bodyFont: { family: "'Heebo', sans-serif" },
+                    titleFont: { family: "'Heebo', sans-serif" }
+                }
+            }
+        }
+    });
+
+    // Chart 2: Recovery Curve
+    const recoveryCurveCtx = document.getElementById('recoveryCurveChart').getContext('2d');
+    new Chart(recoveryCurveCtx, {
+        type: 'line',
+        data: {
+            labels: ['שבוע 1', 'חודש 1', 'חודש 2', 'חודש 3', '90+ יום'],
+            datasets: [{
+                label: 'עוצמת התשוקה (Cravings)',
+                data: [90, 70, 40, 20, 10],
+                borderColor: '#f97316',
+                backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                fill: true,
+                tension: 0.4
+            }, {
+                label: 'שליטה עצמית וחוסן',
+                data: [10, 30, 60, 80, 95],
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { color: '#9ca3af' },
+                    grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                },
+                x: {
+                    ticks: { color: '#9ca3af' },
+                    grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                }
+            },
+            plugins: {
+                legend: { labels: { color: '#d1d5db', font: { family: "'Heebo', sans-serif" } } },
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    bodyFont: { family: "'Heebo', sans-serif" },
+                    titleFont: { family: "'Heebo', sans-serif" }
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
 

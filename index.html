@@ -67,34 +67,39 @@
             justify-content: center;
             margin-bottom: 1rem;
         }
-        .phase-card {
+        .accordion-item {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        .accordion-header {
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            position: relative;
-        }
-        .phase-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-        .phase-content {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 50;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-        .phase-content.active {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            transition: background-color 0.2s ease-in-out;
         }
-        .phase-modal {
-            max-width: 600px;
-            width: 100%;
+        .accordion-header:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding: 0 1.5rem;
+        }
+        .accordion-arrow {
+            transition: transform 0.3s ease-in-out;
+            background-color: #f1f5f9;
+            border-radius: 50%;
+            padding: 0.25rem;
+        }
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(180deg);
+            background-color: #0284c7;
+            color: white;
         }
     </style>
 </head>
@@ -149,27 +154,103 @@
         </section>
         
         <section class="section" id="protocol-section">
-            <div class="max-w-5xl mx-auto w-full">
+            <div class="max-w-4xl mx-auto w-full">
                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 step">מפת הדרכים: המסע לשינוי</h2>
                 <p class="text-lg text-slate-600 text-center mb-16 max-w-3xl mx-auto step">תהליך הריפוי בנוי משלושה שלבים ברורים. לחץ על כל שלב כדי לחקור אותו לעומק.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Phase 1 Card -->
-                    <div class="card p-8 text-center step phase-card" data-phase="1">
-                        <div class="text-3xl font-bold text-sky-500 mb-4">שלב 1</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-2">יצירת מרחב</h3>
-                        <p class="text-slate-500">(ימים 1-30)</p>
-                    </div>
-                    <!-- Phase 2 Card -->
-                    <div class="card p-8 text-center step phase-card" data-phase="2">
-                        <div class="text-3xl font-bold text-sky-500 mb-4">שלב 2</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-2">בנייה מחדש</h3>
-                        <p class="text-slate-500">(ימים 31-90)</p>
-                    </div>
-                    <!-- Phase 3 Card -->
-                    <div class="card p-8 text-center step phase-card" data-phase="3">
-                        <div class="text-3xl font-bold text-sky-500 mb-4">שלב 3</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-2">צמיחה</h3>
-                        <p class="text-slate-500">(ימים 90+)</p>
+                <div class="card step">
+                    <div class="accordion">
+                        <!-- Accordion Item 1 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-2xl font-bold text-sky-500">01</span>
+                                    <span class="text-2xl font-bold text-slate-800">יצירת מרחב (ימים 1-30)</span>
+                                </div>
+                                <svg class="accordion-arrow w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="pt-4 pb-8 space-y-6">
+                                    <p class="text-lg"><strong>המטרה:</strong> לאפשר למערכת העצבית מנוחה והתחלה של איזון טבעי. זהו שלב של ניקוי רעשים ויצירת בסיס יציב להמשך.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>ניתוק מוחלט מהמקור:</strong> הסרת כל תוכן, התקנת חוסמים. אפס סובלנות.</li>
+                                            <li><strong>שבירת התניות סביבתיות:</strong> אין מסכים בחדר השינה. שינוי סידור החדר.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: תסמיני גמילה</h4>
+                                        <p class="mt-2 text-slate-600">צפה לערפל מוחי, עצבנות, חרדה וקשיי שינה. זו תגובה כימית נורמלית וזמנית. התמודד איתה בעזרת שינה מסודרת, שתיית מים, והליכות קצרות.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-600">ההישג: בהירות ראשונית</h4>
+                                        <p class="mt-2 text-slate-600">בסוף שלב זה, תתחיל לחוות רגעים של שקט מנטלי. התשוקות עדיין קיימות, אך ה"רעש" הכללי יורד, ואתה מתחיל להרגיש שאתה חוזר לשלוט בהגה.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Accordion Item 2 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-2xl font-bold text-sky-500">02</span>
+                                    <span class="text-2xl font-bold text-slate-800">בנייה מחדש (ימים 31-90)</span>
+                                </div>
+                                <svg class="accordion-arrow w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                               <div class="pt-4 pb-8 space-y-6">
+                                    <p class="text-lg"><strong>המטרה:</strong> לבנות באופן פעיל מסלולים נוירולוגיים חדשים ובריאים שיספקו תגמול טבעי ויחליפו את התלות בגירוי המלאכותי.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>פעילות גופנית אינטנסיבית:</strong> 3-4 אימונים בשבוע. הדרך היעילה ביותר לאיזון דופמין טבעי.</li>
+                                            <li><strong>תרגול מיינדפולנס:</strong> 10 דקות מדיטציה ביום לחיזוק השליטה העצמית.</li>
+                                            <li><strong>חשיפה חברתית מבוקרת:</strong> יצירת קשרים אמיתיים, גם אם זה מתחיל בקטן.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: ה-"Flatline"</h4>
+                                        <p class="mt-2 text-slate-600">תקופה של ירידה דרמטית בחשק המיני. זהו לא נזק, אלא <strong class="text-emerald-600">סימן ריפוי קריטי</strong>. המוח מכייל מחדש את המערכת המינית. קבל את התקופה הזו בסבלנות.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-600">ההישג: חיוניות חוזרת</h4>
+                                        <p class="mt-2 text-slate-600">האנרגיה הכללית עולה. המוטיבציה לפעילויות יומיומיות חוזרת. המשיכה המינית מתחילה להתעורר מחדש, הפעם כלפי אנשים אמיתיים.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Accordion Item 3 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-2xl font-bold text-sky-500">03</span>
+                                    <span class="text-2xl font-bold text-slate-800">צמיחה (ימים 90+)</span>
+                                </div>
+                                <svg class="accordion-arrow w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="pt-4 pb-8 space-y-6">
+                                    <p class="text-lg"><strong>המטרה:</strong> להפוך את השינוי לחלק טבעי מאורח החיים ולבנות חוסן מנטלי ורגשי לטווח הארוך.</p>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
+                                        <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
+                                            <li><strong>מציאת משמעות:</strong> הפניית האנרגיה לתחביבים, פרויקטים ומטרות שמעניקים סיפוק עמוק.</li>
+                                            <li><strong>העמקת קשרים:</strong> השקעה במערכות יחסים המבוססות על חיבור ואינטימיות.</li>
+                                            <li><strong>בניית חוסן מול נפילות:</strong> הבנה שנפילה אינה כישלון, אלא הזדמנות ללמוד ולהתאים את המערכת.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-700">אתגר צפוי: שאננות</h4>
+                                        <p class="mt-2 text-slate-600">לאחר תקופה טובה, קל לחזור להרגלים ישנים. המפתח הוא להישאר מודע, להמשיך בתרגול, ולא לקחת את ההתקדמות כמובנת מאליה.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-emerald-600">ההישג: חופש אמיתי</h4>
+                                        <p class="mt-2 text-slate-600">השליטה חוזרת לידיים שלך. אתה כבר לא מונע על ידי דחפים, אלא על ידי ערכים ומטרות. זוהי תחושה של חופש פנימי ויציבות.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,82 +266,6 @@
             </div>
         </section>
 
-    </div>
-
-    <!-- Modals for Phases -->
-    <div id="phase-1-content" class="phase-content">
-        <div class="card p-8 phase-modal">
-            <h3 class="text-3xl font-bold text-slate-800 mb-4">שלב 1: יצירת מרחב (ימים 1-30)</h3>
-            <div class="space-y-6">
-                <p class="text-lg"><strong>המטרה:</strong> לאפשר למערכת העצבית מנוחה והתחלה של איזון טבעי. זהו שלב של ניקוי רעשים ויצירת בסיס יציב להמשך.</p>
-                <div>
-                    <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
-                    <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
-                        <li><strong>ניתוק מוחלט מהמקור:</strong> הסרת כל תוכן, התקנת חוסמים. אפס סובלנות.</li>
-                        <li><strong>שבירת התניות סביבתיות:</strong> אין מסכים בחדר השינה. שינוי סידור החדר.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-700">אתגר צפוי: תסמיני גמילה</h4>
-                    <p class="mt-2 text-slate-600">צפה לערפל מוחי, עצבנות, חרדה וקשיי שינה. זו תגובה כימית נורמלית וזמנית. התמודד איתה בעזרת שינה מסודרת, שתיית מים, והליכות קצרות.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-emerald-600">ההישג: בהירות ראשונית</h4>
-                    <p class="mt-2 text-slate-600">בסוף שלב זה, תתחיל לחוות רגעים של שקט מנטלי. התשוקות עדיין קיימות, אך ה"רעש" הכללי יורד, ואתה מתחיל להרגיש שאתה חוזר לשלוט בהגה.</p>
-                </div>
-                <button class="close-modal-btn mt-6 w-full bg-sky-500 text-white py-2 px-4 rounded-lg">סגור</button>
-            </div>
-        </div>
-    </div>
-    <div id="phase-2-content" class="phase-content">
-        <div class="card p-8 phase-modal">
-            <h3 class="text-3xl font-bold text-slate-800 mb-4">שלב 2: בנייה מחדש (ימים 31-90)</h3>
-            <div class="space-y-6">
-                <p class="text-lg"><strong>המטרה:</strong> לבנות באופן פעיל מסלולים נוירולוגיים חדשים ובריאים שיספקו תגמול טבעי ויחליפו את התלות בגירוי המלאכותי.</p>
-                <div>
-                    <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
-                    <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
-                        <li><strong>פעילות גופנית אינטנסיבית:</strong> 3-4 אימונים בשבוע. הדרך היעילה ביותר לאיזון דופמין טבעי.</li>
-                        <li><strong>תרגול מיינדפולנס:</strong> 10 דקות מדיטציה ביום לחיזוק השליטה העצמית.</li>
-                        <li><strong>חשיפה חברתית מבוקרת:</strong> יצירת קשרים אמיתיים, גם אם זה מתחיל בקטן.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-700">אתגר צפוי: ה-"Flatline"</h4>
-                    <p class="mt-2 text-slate-600">תקופה של ירידה דרמטית בחשק המיני. זהו לא נזק, אלא <strong class="text-emerald-600">סימן ריפוי קריטי</strong>. המוח מכייל מחדש את המערכת המינית. קבל את התקופה הזו בסבלנות.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-emerald-600">ההישג: חיוניות חוזרת</h4>
-                    <p class="mt-2 text-slate-600">האנרגיה הכללית עולה. המוטיבציה לפעילויות יומיומיות חוזרת. המשיכה המינית מתחילה להתעורר מחדש, הפעם כלפי אנשים אמיתיים.</p>
-                </div>
-                <button class="close-modal-btn mt-6 w-full bg-sky-500 text-white py-2 px-4 rounded-lg">סגור</button>
-            </div>
-        </div>
-    </div>
-    <div id="phase-3-content" class="phase-content">
-        <div class="card p-8 phase-modal">
-            <h3 class="text-3xl font-bold text-slate-800 mb-4">שלב 3: צמיחה (ימים 90+)</h3>
-            <div class="space-y-6">
-                <p class="text-lg"><strong>המטרה:</strong> להפוך את השינוי לחלק טבעי מאורח החיים ולבנות חוסן מנטלי ורגשי לטווח הארוך.</p>
-                <div>
-                    <h4 class="font-bold text-slate-700">פעולות מפתח:</h4>
-                    <ul class="list-disc list-inside mt-2 space-y-2 text-slate-600">
-                        <li><strong>מציאת משמעות:</strong> הפניית האנרגיה לתחביבים, פרויקטים ומטרות שמעניקים סיפוק עמוק.</li>
-                        <li><strong>העמקת קשרים:</strong> השקעה במערכות יחסים המבוססות על חיבור ואינטימיות.</li>
-                        <li><strong>בניית חוסן מול נפילות:</strong> הבנה שנפילה אינה כישלון, אלא הזדמנות ללמוד ולהתאים את המערכת.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-700">אתגר צפוי: שאננות</h4>
-                    <p class="mt-2 text-slate-600">לאחר תקופה טובה, קל לחזור להרגלים ישנים. המפתח הוא להישאר מודע, להמשיך בתרגול, ולא לקחת את ההתקדמות כמובנת מאליה.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-emerald-600">ההישג: חופש אמיתי</h4>
-                    <p class="mt-2 text-slate-600">השליטה חוזרת לידיים שלך. אתה כבר לא מונע על ידי דחפים, אלא על ידי ערכים ומטרות. זוהי תחושה של חופש פנימי ויציבות.</p>
-                </div>
-                <button class="close-modal-btn mt-6 w-full bg-sky-500 text-white py-2 px-4 rounded-lg">סגור</button>
-            </div>
-        </div>
     </div>
 
 <script>
@@ -285,41 +290,21 @@
             );
         });
         
-        // --- Interactive Phases Logic ---
-        const phaseCards = document.querySelectorAll('.phase-card');
-        const phaseContents = document.querySelectorAll('.phase-content');
-        const closeButtons = document.querySelectorAll('.close-modal-btn');
-
-        phaseCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const phase = card.dataset.phase;
-                const content = document.getElementById(`phase-${phase}-content`);
-                if (content) {
-                    content.classList.add('active');
-                    gsap.fromTo(content, {opacity: 0}, {opacity: 1, duration: 0.3});
-                    gsap.fromTo(content.querySelector('.phase-modal'), {opacity: 0, scale: 0.95}, {opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out'});
-                }
-            });
-        });
-
-        function closeModal(content) {
-            gsap.to(content.querySelector('.phase-modal'), {opacity: 0, scale: 0.95, duration: 0.3, ease: 'power2.in'});
-            gsap.to(content, {opacity: 0, duration: 0.3, onComplete: () => {
-                content.classList.remove('active');
-            }});
-        }
-
-        closeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const content = btn.closest('.phase-content');
-                if(content) closeModal(content);
-            });
-        });
-        
-        phaseContents.forEach(content => {
-            content.addEventListener('click', (e) => {
-                if(e.target === content) {
-                    closeModal(content);
+        // --- Accordion Logic ---
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            const content = item.querySelector('.accordion-content');
+            header.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                // Close all items
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('open');
+                    i.querySelector('.accordion-content').style.maxHeight = '0px';
+                });
+                // Open the clicked one if it wasn't open
+                if (!isOpen) {
+                    item.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 'px';
                 }
             });
         });

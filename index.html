@@ -201,21 +201,19 @@
         gsap.registerPlugin(ScrollTrigger);
 
         // --- Scrollytelling Animations ---
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
+        document.querySelectorAll('.section').forEach(section => {
             const steps = section.querySelectorAll('.step');
-            gsap.from(steps, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 80%",
-                    end: "bottom center",
-                    toggleActions: "play none none none"
-                },
-                opacity: 0,
-                y: 30,
+            gsap.to(steps, {
+                opacity: 1,
+                y: 0,
                 duration: 0.8,
                 stagger: 0.2,
-                ease: "power2.out"
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 70%",
+                    toggleActions: "play none none none",
+                }
             });
         });
 
@@ -224,15 +222,17 @@
         const contents = document.querySelectorAll('.protocol-content');
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                const target = tab.id.replace('tab-', 'content-');
+                const targetId = tab.id.replace('tab-', 'content-');
                 
                 tabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
 
                 contents.forEach(c => {
-                    c.classList.remove('active');
-                    if (c.id === target) {
-                        c.classList.add('active');
+                    if (c.id === targetId) {
+                        c.style.display = 'block';
+                        gsap.fromTo(c, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.5});
+                    } else {
+                        c.style.display = 'none';
                     }
                 });
             });
@@ -318,17 +318,25 @@
         });
         
         // --- Animate Radar Chart on Scroll ---
-        gsap.to(upgradeChart.data.datasets[1].data, {
-            ...{0:9, 1:8, 2:9, 3:8, 4:8}, // Target values
-            duration: 1.5,
-            ease: "power2.inOut",
-            scrollTrigger: {
-                trigger: "#upgrade-section",
-                start: "top 60%",
-                onEnter: () => upgradeChart.update(),
-                onEnterBack: () => upgradeChart.update(),
+        ScrollTrigger.create({
+            trigger: "#upgrade-section",
+            start: "top 60%",
+            onEnter: () => {
+                gsap.to(upgradeChart.data.datasets[1].data, {
+                    ...{0:9, 1:8, 2:9, 3:8, 4:8},
+                    duration: 1.5,
+                    ease: "power2.inOut",
+                    onUpdate: () => upgradeChart.update()
+                });
             },
-            onUpdate: () => upgradeChart.update()
+            onLeaveBack: () => { // Reset when scrolling up
+                gsap.to(upgradeChart.data.datasets[1].data, {
+                    ...{0:3, 1:2, 2:2, 3:4, 4:1},
+                    duration: 0.5,
+                    ease: "power2.inOut",
+                    onUpdate: () => upgradeChart.update()
+                });
+            }
         });
 
     });

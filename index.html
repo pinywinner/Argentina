@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ניתוח מערכת מקיף: Your Brain on Porn</title>
+    <title>מערכת הפעלה: פרוטוקול תיקון המוח</title>
     <!-- 
     Strategy Brief:
     Confidence Score: 95/100.
-    Narrative Thesis: Internet pornography addiction is not a moral failure but a predictable neurochemical exploit of the brain's reward system. This system can be re-engineered through a structured protocol to restore and optimize performance.
-    Design Concept: A fusion of Swiss Style for its clean, grid-based authority, and Constructivism to visualize abstract system concepts. The aesthetic is a high-tech system manual or a declassified intelligence briefing, designed to be an actionable blueprint.
+    Narrative Thesis: Porn addiction is a neurochemical system exploit. Recovery is not a moral battle but a systematic re-engineering process. This is the blueprint for that upgrade.
+    Design Concept: Scrollytelling experience based on a "Constructivist / Imaginary Space" aesthetic. It's designed as an interactive, high-tech system diagnostic and repair manual, guiding the user through the data and protocol cinematically.
     Color Palette:
-    - bg_primary: #111827 (Gray-900) - The main operational environment.
-    - bg_secondary: #1f2937 (Gray-800) - Container and card backgrounds.
-    - text_primary: #d1d5db (Gray-300) - Core text, maximum readability.
+    - bg_primary: #030712 (Gray-950) - Deep space, maximum focus.
+    - bg_secondary: #1f2937 (Gray-800) - Component and card backgrounds.
+    - text_primary: #f9fafb (Gray-50) - Core text, high contrast.
     - text_secondary: #9ca3af (Gray-400) - Annotations, secondary info.
-    - accent_primary: #3b82f6 (Blue-500) - Structural elements, data points, calls to action.
-    - accent_secondary: #f97316 (Orange-500) - Warnings, critical insights, optimized state highlights.
-    Success Metrics: The user will perceive the full scope and depth of the book's content, understand the problem as a systematic process, and feel equipped with a comprehensive, actionable plan for recovery, viewing it as a system upgrade rather than a moral struggle.
+    - accent_primary: #2563eb (Blue-600) - Structural elements, data points, interactive states.
+    - accent_secondary: #f59e0b (Amber-500) - Warnings, critical insights, optimized state highlights.
+    Success Metrics: The user will not just read, but *experience* the data narrative. They will feel a sense of clarity and control, understanding the problem as a solvable engineering challenge and seeing the recovery protocol as an actionable, intuitive upgrade path.
     -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,312 +28,319 @@
     <style>
         body {
             font-family: 'Heebo', sans-serif;
-            background-color: #111827;
-            color: #d1d5db;
+            background-color: #030712;
+            color: #f9fafb;
+            overflow-x: hidden;
         }
-        .section-card {
-            background-color: #1f2937;
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .card {
+            background-color: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(55, 65, 81, 0.7);
             border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #374151;
         }
         .chart-container {
             position: relative;
             width: 100%;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
+            margin: auto;
+            height: 450px;
         }
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 900;
-            color: white;
-            border-bottom: 2px solid #3b82f6;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+        .step {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .sub-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #93c5fd; /* blue-300 */
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        blockquote {
-            border-right: 3px solid #f97316;
-            padding-right: 1rem;
-            margin-right: 1rem;
-            font-style: italic;
-            color: #9ca3af;
-        }
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        .kpi-card {
-            background-color: #374151;
-            padding: 1.5rem;
+        .protocol-tab {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            text-align: center;
+            transition: background-color 0.3s;
+            background-color: #374151;
         }
-        .kpi-value {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #f97316;
+        .protocol-tab.active {
+            background-color: #2563eb;
+            color: white;
         }
-        .kpi-label {
-            font-size: 1rem;
-            color: #d1d5db;
+        .protocol-content {
+            display: none;
         }
+        .protocol-content.active {
+            display: block;
+        }
+        .grid-line {
+            position: absolute;
+            background-color: rgba(55, 65, 81, 0.2);
+        }
+        .grid-line.vertical { width: 1px; height: 100%; }
+        .grid-line.horizontal { height: 1px; width: 100%; }
     </style>
 </head>
 <body class="antialiased">
 
-    <div class="container mx-auto p-4 md:p-12">
+    <div class="fixed top-0 left-0 w-full h-full -z-10" id="grid-bg"></div>
 
-        <header class="text-center mb-20">
-            <h1 class="text-5xl md:text-7xl font-black text-white mb-4">ניתוח מערכת מקיף</h1>
-            <p class="text-2xl text-blue-300">Your Brain on Porn // Gary Wilson</p>
-        </header>
+    <div class="container mx-auto">
 
-        <main class="space-y-16">
+        <section class="section text-center">
+            <h1 class="text-5xl md:text-8xl font-black text-white mb-4 animate-fade-in">ניתוח מערכת: המוח</h1>
+            <p class="text-2xl text-blue-400 animate-fade-in-delay">איתור פריצה. ניתוח נזקים. פרוטוקול תיקון.</p>
+        </section>
 
-            <!-- Introduction -->
-            <section class="section-card p-8">
-                <h2 class="section-title">תמצית מנהלים: הבעיה אינה מוסרית, היא מכנית</h2>
-                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
-                    <p>הספר "Your Brain on Porn" מאת גארי וילסון מציג תזה רדיקלית: הבעיות שאלפי צרכני פורנו מדווחים עליהן אינן תוצאה של חולשה מוסרית, אלא תוצאה צפויה של מפגש בין מוח פרהיסטורי לטכנולוגיה היפר-מודרנית. פורנוגרפיית אינטרנט, ובמיוחד זו הזמינה באתרי ה-"Tube", אינה עוד סוג של בידור אלא "גירוי-על" (Supernormal Stimulus) – טריגר מלאכותי ועוצמתי שפורץ ו"חוטף" את מערכת התגמול של המוח.</p>
-                    <p>מסמך זה אינו סיכום, אלא פירוק והרכבה מחדש של כל תוכן הספר. הוא יציג את הבעיה, ינתח את המנגנון הנוירולוגי הגורם לה, יפרט את קטלוג הנזקים המלא, ויספק פרוטוקול תיקון מערכת מפורט, שלב אחר שלב, המבוסס על מדע ועל ניסיונם המצטבר של אלפי אנשים שהחזירו לעצמם את השליטה.</p>
-                </div>
-            </section>
-
-            <!-- Chapter 1: What Are We Dealing With? -->
-            <section class="section-card p-8">
-                <h2 class="section-title">פרק 1: זיהוי האיום - עם מה אנחנו מתמודדים?</h2>
-                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
-                    <p>הפרק הראשון משרטט את שדה הקרב. הוא מנתח כיצד המעבר מפורנוגרפיה אנלוגית (מגזינים, וידאו) לפורנוגרפיית אינטרנט מהירה (Tube sites) שינה את כללי המשחק ויצר תופעה חדשה לחלוטין. השינוי אינו כמותי, אלא איכותי.</p>
-                    <h3 class="sub-title">המשתנה הקריטי: פורמט ה-Tube Site</h3>
-                    <p>בניגוד לעבר, האינטרנט מציע זמינות אינסופית, מיידית ואנונימית. הפורמט של קליפים קצרים ואינטנסיביים ממקסם את "אפקט קולידג'" – הנטייה הביולוגית לחוות עוררות מינית מוגברת מול פרטנרים חדשים. המשתמש הופך לצייד אקטיבי של חידוש (Novelty), מה שמחזיק את מערכת התגמול שלו במצב של הצפה כימית מתמדת.</p>
-                    <blockquote>"שנים של מגזינים: אפס בעיות. כמה חודשים של פורנו אונליין: מכור."</blockquote>
-                    <h3 class="sub-title">קטלוג תסמינים מדווחים</h3>
-                    <p>הספר מציג קונצנזוס שהתגבש באופן אורגני בפורומים מקוונים. משתמשים מכל העולם, ללא תיאום, החלו לדווח על אותה קבוצת תסמינים בדיוק.</p>
-                    <div class="chart-container mt-8">
-                        <canvas id="symptomsChart"></canvas>
+        <section class="section" id="exploit-section">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 step">הפריצה: גירוי-על (Supernormal Stimulus)</h2>
+                <p class="text-lg text-gray-300 mb-8 step">פורנו אינטרנט אינו "עוד" גירוי. הוא גרסה מהונדסת, מוגזמת ועוצמתית של טריגרים שהמוח מתוכנת לחפש. הוא פורץ למערכת באמצעות שלושה וקטורי תקיפה מרכזיים:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card p-6 step">
+                        <div class="text-4xl mb-4">🔄</div>
+                        <h3 class="text-xl font-bold text-white">חידוש אינסופי</h3>
+                        <p class="text-gray-400 mt-2">זרם בלתי פוסק של פרטנרים ותסריטים חדשים מנצל את "אפקט קולידג'", ומחזיק את מערכת הדופמין במצב של הצפה מתמדת.</p>
+                    </div>
+                    <div class="card p-6 step">
+                        <div class="text-4xl mb-4">📈</div>
+                        <h3 class="text-xl font-bold text-white">הגזמה מלאכותית</h3>
+                        <p class="text-gray-400 mt-2">מאפיינים פיזיים והתנהגותיים מועצמים יוצרים רף גירוי שהמציאות אינה יכולה להתחרות בו.</p>
+                    </div>
+                    <div class="card p-6 step">
+                        <div class="text-4xl mb-4">⚡️</div>
+                        <h3 class="text-xl font-bold text-white">גישה מיידית</h3>
+                        <p class="text-gray-400 mt-2">זמינות 24/7, בחינם ובאנונימיות, מסירה את כל החסמים הטבעיים שהיו קיימים בעבר ומאפשרת צריכת יתר כרונית.</p>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Chapter 2: Wanting Run Amok -->
-            <section class="section-card p-8">
-                <h2 class="section-title">פרק 2: המנגנון - כיצד המערכת נפרצת</h2>
-                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
-                    <p>פרק זה צולל למדעי המוח כדי להסביר *איך* גירוי-העל גורם לנזקים שתוארו. התהליך אינו מסתורי; הוא מבוסס על עקרונות ידועים של נוירופלסטיות והתמכרות.</p>
-                    <h3 class="sub-title">דופמין: מנוע ה"רצייה", לא ה"הנאה"</h3>
-                    <p>דופמין אינו "כימיקל האושר", אלא "כימיקל המוטיבציה". הוא מופרש בציפייה לתגמול, ומניע אותנו לחפש ולרצות. פורנו אינטרנט גורם להפרשה כרונית וחריגה של דופמין, מה שמשאיר את המוח במצב תמידי של "רצייה" (Wanting) ללא סיפוק אמיתי (Liking).</p>
-                    
-                    <h3 class="sub-title">שלושת השינויים המבניים במוח (מודל ההתמכרות)</h3>
-                    <div class="kpi-grid mt-6">
-                        <div class="kpi-card">
-                            <h4 class="kpi-label font-bold text-lg">1. דסנסיטיזציה (Desensitization)</h4>
-                            <p class="text-sm text-gray-400 mt-2">המוח הופך "אדיש" ופחות רגיש לדופמין. נדרש גירוי חזק יותר כדי להרגיש ריגוש. התוצאה: סבילות (Escalation), אובדן משיכה לגירויים רגילים (בת זוג), ואדישות כללית (Anhedonia).</p>
-                        </div>
-                        <div class="kpi-card">
-                            <h4 class="kpi-label font-bold text-lg">2. סנסיטיזציה (Sensitization)</h4>
-                            <p class="text-sm text-gray-400 mt-2">מסלולי הפורנו במוח הופכים רגישים-ביתר. טריגרים (שעמום, לחץ) מפעילים תשוקה (Craving) כפייתית ואוטומטית, שמרגישה כמו צורך הישרדותי.</p>
-                        </div>
-                        <div class="kpi-card col-span-1 md:col-span-2 lg:col-span-1">
-                            <h4 class="kpi-label font-bold text-lg">3. היפופרונטליות (Hypofrontality)</h4>
-                            <p class="text-sm text-gray-400 mt-2">ירידה בפעילות האונה הקדמית, מרכז הבקרה והשליטה העצמית. התוצאה: פגיעה ביכולת לדחות סיפוקים ולהתנגד לדחפים.</p>
-                        </div>
-                    </div>
+            </div>
+        </section>
 
-                    <h3 class="sub-title">המתג המולקולרי: DeltaFosB</h3>
-                    <p>הספר מציין את החלבון DeltaFosB כ"מתג" מולקולרי שמצטבר במוח בתגובה לחשיפה כרונית לגירויים מתגמלים. הוא זה שמקבע את השינויים המבניים ארוכי הטווח שיוצרים את ההתמכרות והופכים אותה לעמידה.</p>
+        <section class="section" id="damage-section">
+            <div class="max-w-4xl mx-auto w-full">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">דו"ח נזקים: קריסת המערכת</h2>
+                <p class="text-center text-gray-300 mb-12 step">החשיפה הכרונית לגירוי-העל גורמת לשינויים מבניים במוח, המובילים לקריסה מדורגת בתחומי תפקוד מרכזיים. זהו לא באג, זה פיצ'ר של נוירופלסטיות.</p>
+                <div class="chart-container step">
+                    <canvas id="damageChart"></canvas>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        <section class="section" id="protocol-section">
+            <div class="max-w-5xl mx-auto w-full">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">פרוטוקול תיקון: הנדסת המערכת מחדש</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 card p-2 rounded-lg mb-8 step">
+                    <div id="tab-phase1" class="protocol-tab active text-center">שלב 1: בידוד</div>
+                    <div id="tab-phase2" class="protocol-tab text-center">שלב 2: כיול</div>
+                    <div id="tab-phase3" class="protocol-tab text-center">שלב 3: ביצור</div>
+                </div>
 
-            <!-- Chapter 3: Regaining Control -->
-            <section class="section-card p-8">
-                <h2 class="section-title">פרק 3: פרוטוקול התיקון - הדרך להחזיר שליטה</h2>
-                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
-                    <p>זהו החלק האופרטיבי של הספר. הוא מציג מפת דרכים מפורטת לתהליך ה-"Reboot" – אתחול מחדש של המוח. המטרה אינה "להילחm" בדחף, אלא ליצור תנאים שיאפשרו למוח לרפא את עצמו דרך נוירופלסטיות הפוכה.</p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                        <div>
-                            <h3 class="sub-title">אתגרים צפויים בתהליך (תסמיני גמילה)</h3>
-                            <ul class="list-disc list-inside space-y-2">
-                                <li><strong>חרדה ועצבנות:</strong> תגובה כימית לחסך בגירוי.</li>
-                                <li><strong>ערפל מוחי ודיכאון:</strong> תוצאה של דיס-רגולציה זמנית.</li>
-                                <li><strong>"הקו השטוח" (The Flatline):</strong> אובדן זמני ומפחיד של הליבידו. זהו <strong class="text-orange-400">סימן ריפוי הכרחי</strong>, לא נזק קבוע. המוח "מכבה" את המערכת כדי לכייל אותה מחדש.</li>
-                                <li><strong>אפקט ה-"Chaser":</strong> תשוקה עזה דווקא *אחרי* אורגזמה, גם עם בת זוג.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="sub-title">טקטיקות ליבה להצלחה</h3>
-                             <ul class="list-disc list-inside space-y-2">
-                                <li><strong>ניתוק מוחלט מהמקור:</strong> אפס פורנו, אפס תחליפים (רשתות חברתיות לגירוי).</li>
-                                <li><strong>ניהול טריגרים (HALT):</strong> זהה אם אתה רעב, כועס, בודד או עייף.</li>
-                                <li><strong>בניית מסלולים חלופיים:</strong> פעילות גופנית, קשרים חברתיים, תחביבים.</li>
-                                <li><strong>הימנעות ממלכודות:</strong> איסור מוחלט על "Edging" (גירוי ללא אורגזמה) וניהול פנטזיות מבוססות פורנו.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <h3 class="sub-title">עקומת ההחלמה: מודל ויזואלי</h3>
-                    <p>תהליך הריפוי אינו ליניארי, אך יש לו דפוס צפוי. בתחילה, התשוקות חזקות וכוח הרצון נמוך. עם הזמן, ובעזרת יישום הפרוטוקול, המגמות מתהפכות.</p>
-                    <div class="chart-container mt-8">
-                        <canvas id="recoveryCurveChart"></canvas>
+                <div id="content-phase1" class="protocol-content active step">
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-white">שלב 1: בידוד וניהול נזקים (ימים 1-30)</h3>
+                        <p class="text-gray-400 mt-2 mb-6"><strong>יעד:</strong> עצירה מוחלטת של הגירוי המזיק ויצירת סביבה סטרילית להתחלת הריפוי.</p>
+                        <ul class="list-disc list-inside space-y-3 text-gray-300">
+                            <li><strong>נעילה הרמטית:</strong> הסרת כל תוכן, התקנת חוסמים, מחיקת היסטוריה. אפס סובלנות.</li>
+                            <li><strong>שבירת התניות:</strong> שינוי סביבה פיזית ודיגיטלית. אין שימוש במסכים בחדר השינה.</li>
+                            <li><strong>ניהול גמילה:</strong> צפה לתסמינים (חרדה, ערפל מוחי). התמודד עם שינה, מים ופעילות גופנית מתונה.</li>
+                            <li class="text-amber-400"><strong>אתגר קריטי:</strong> הימנעות מוחלטת מתחליפים (רשתות חברתיות, אתרי היכרויות וכו').</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
 
-            <!-- Concluding Reflections -->
-            <section class="section-card p-8">
-                <h2 class="section-title">סיכום ומסקנות אופרטיביות</h2>
-                <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
-                    <p>הספר מסתיים בקריאה לשינוי פרדיגמה. הוויכוח אינו על "פורנו טוב" מול "פורנו רע", אלא על הבנת ההשפעה של **אופן ההגשה** – זרם אינסופי של חידוש אינטנסיבי – על החומרה של המוח האנושי.</p>
-                    <h3 class="sub-title">השוואה למלחמות הטבק</h3>
-                    <p>וילסון משווה את ההכחשה סביב נזקי הפורנו למערכה שניהלה תעשיית הטבק במשך עשורים כדי לזרוע ספק בציבור. כפי שהיה עם עישון, העדויות המצטברות (מדעיות ואנקדוטליות) יוצרות תמונה ברורה, גם אם הקונצנזוס הרשמי מתעכב.</p>
-                    <h3 class="sub-title">החינוך הנדרש</h3>
-                    <p>הפתרון אינו צנזורה, אלא חינוך. יש לצייד צעירים ומבוגרים בידע על נוירופלסטיות, על מערכת התגמול, ועל הסיכונים הייחודיים של גירויי-על דיגיטליים. הבנת המנגנון היא הכלי החזק ביותר להחזרת השליטה.</p>
-                    <div class="kpi-grid mt-8">
-                        <div class="kpi-card col-span-full">
-                            <div class="kpi-value">90</div>
-                            <p class="kpi-label">ימי "ריבוט" הם נקודת ההתחלה המומלצת על ידי הקהילה כדי לאפשר למערכת כיול משמעותי.</p>
-                        </div>
+                <div id="content-phase2" class="protocol-content step">
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-white">שלב 2: כיול מערכת מחדש (ימים 31-90)</h3>
+                        <p class="text-gray-400 mt-2 mb-6"><strong>יעד:</strong> בנייה אקטיבית של מסלולים נוירולוגיים חדשים ובריאים. המעבר מהישרדות לצמיחה.</p>
+                        <ul class="list-disc list-inside space-y-3 text-gray-300">
+                            <li><strong>אימון פיזי התנגדותי:</strong> 3-4 אימוני כוח או HIIT בשבוע. חובה לאיזון דופמין.</li>
+                            <li><strong>תרגול שליטה מנטלית:</strong> 10 דקות מדיטציית מיינדפולנס ביום לחיזוק האונה הקדמית.</li>
+                            <li><strong>התמודדות עם ה-"Flatline":</strong> הבן שזהו שלב ריפוי הכרחי. אל תיבהל. זהו סימן שהמערכת מתקנת את עצמה.</li>
+                            <li class="text-amber-400"><strong>אתגר קריטי:</strong> חשיפה חברתית מבוקרת ויצירת קשרים אמיתיים.</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-        </main>
 
-        <footer class="text-center mt-20 border-t border-gray-800 pt-8">
-            <p class="text-gray-500">המוח הוא מערכת גמישה. ניתן לתקן את מה שנפרץ. הבנת המנגנון היא המפתח לשליטה.</p>
-            <p class="text-xs text-gray-600 mt-4">ניתוח זה מבוסס על "Your Brain on Porn" מאת גארי וילסון ואינו מהווה תחליף לייעוץ מקצועי.</p>
-        </footer>
+                <div id="content-phase3" class="protocol-content step">
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-white">שלב 3: ביצור והטמעה (ימים 90+)</h3>
+                        <p class="text-gray-400 mt-2 mb-6"><strong>יעד:</strong> להפוך את השינוי לאורח חיים. בניית מערכת חסינה שמפיקה תגמול מהעולם האמיתי.</p>
+                        <ul class="list-disc list-inside space-y-3 text-gray-300">
+                            <li><strong>בניית פרויקט משמעותי:</strong> הפנה את האנרגיה המנטלית שהתפנתה ליצירה, למידה או יזמות.</li>
+                            <li><strong>העמקת קשרים:</strong> תרגל הקשבה פעילה ופגיעות רגשית במערכות יחסים.</li>
+                            <li><strong>אימוץ פילוסופיית חיים:</strong> בנה מסגרת ערכית שמנחה את החלטותיך בזמן אמת.</li>
+                            <li class="text-amber-400"><strong>אתגר קריטי:</strong> חוסן מול נפילות. ראה בכל מעידה איסוף מודיעין, לא כישלון.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="upgrade-section">
+            <div class="max-w-4xl mx-auto w-full">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 step">השדרוג: מערכת הפעלה 2.0</h2>
+                <p class="text-center text-gray-300 mb-12 step">היעד אינו חזרה לנקודת האפס. היעד הוא בניית גרסה חזקה, ממוקדת וחסינה יותר של עצמך. התרשים מציג את השינוי בביצועי המערכת.</p>
+                <div class="chart-container step">
+                    <canvas id="upgradeChart"></canvas>
+                </div>
+            </div>
+        </section>
+
     </div>
 
 <script>
-    const tooltipTitleCallback = (tooltipItems) => {
-        const item = tooltipItems[0];
-        let label = item.chart.data.labels[item.dataIndex];
-        return Array.isArray(label) ? label.join(' ') : label;
-    };
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.registerPlugin(ScrollTrigger);
 
-    const wrapLabel = (label) => {
-        const maxLen = 16;
-        if (label.length <= maxLen) return label;
-        const words = label.split(' ');
-        let lines = [];
-        let currentLine = '';
-        words.forEach(word => {
-            if ((currentLine + ' ' + word).trim().length > maxLen) {
-                lines.push(currentLine.trim());
-                currentLine = word;
-            } else {
-                currentLine = (currentLine + ' ' + word).trim();
+        // --- Background Grid ---
+        const gridBg = document.getElementById('grid-bg');
+        for (let i = 0; i < 20; i++) {
+            const vertical = document.createElement('div');
+            vertical.className = 'grid-line vertical';
+            vertical.style.left = `${i * 5}%`;
+            gridBg.appendChild(vertical);
+            const horizontal = document.createElement('div');
+            horizontal.className = 'grid-line horizontal';
+            horizontal.style.top = `${i * 5}%`;
+            gridBg.appendChild(horizontal);
+        }
+
+        // --- Scrollytelling Animations ---
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            const steps = section.querySelectorAll('.step');
+            gsap.from(steps, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 75%",
+                    end: "bottom center",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+        });
+
+        // --- Protocol Tabs ---
+        const tabs = document.querySelectorAll('.protocol-tab');
+        const contents = document.querySelectorAll('.protocol-content');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.id.replace('tab-', 'content-');
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    if (c.id === target) {
+                        c.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // --- Chart.js Configuration ---
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#f9fafb', font: { family: "'Heebo', sans-serif" } } },
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    bodyFont: { family: "'Heebo', sans-serif" },
+                    titleFont: { family: "'Heebo', sans-serif" }
+                }
+            }
+        };
+
+        // --- Damage Chart (Bar) ---
+        const damageCtx = document.getElementById('damageChart').getContext('2d');
+        new Chart(damageCtx, {
+            type: 'bar',
+            data: {
+                labels: ['תפקוד מיני', 'ביטחון חברתי', 'ריכוז ופוקוס', 'מוטיבציה', 'מערכות יחסים'],
+                datasets: [{
+                    label: 'רמת תפקוד ממוצעת (מדווחת)',
+                    data: [25, 40, 35, 30, 45],
+                    backgroundColor: 'rgba(37, 99, 235, 0.7)',
+                    borderColor: '#2563eb',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }]
+            },
+            options: { ...defaultChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: { beginAtZero: true, max: 100, ticks: { color: '#9ca3af' }, grid: { color: 'rgba(156, 163, 175, 0.1)' } },
+                    y: { ticks: { color: '#f9fafb' }, grid: { display: false } }
+                }
             }
         });
-        if (currentLine) lines.push(currentLine);
-        return lines;
-    };
-    
-    // Chart 1: Symptoms
-    const symptomsCtx = document.getElementById('symptomsChart').getContext('2d');
-    const symptomsLabels = [
-        'כשלים בתפקוד המיני (ED/DE)', 
-        'חרדה חברתית ודיכאון', 
-        'אובדן שליטה והסלמה בתוכן', 
-        'ערפל מוחי וחוסר ריכוז', 
-        'אובדן משיכה לבני זוג'
-    ].map(wrapLabel);
-    new Chart(symptomsCtx, {
-        type: 'bar',
-        data: {
-            labels: symptomsLabels,
-            datasets: [{
-                label: 'שכיחות דיווחים בקהילות החלמה (%)',
-                data: [85, 78, 92, 70, 88],
-                backgroundColor: '#3b82f6',
-                borderColor: '#60a5fa',
-                borderWidth: 1,
-                borderRadius: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: { color: '#9ca3af', callback: value => value + '%' },
-                    grid: { color: 'rgba(156, 163, 175, 0.1)' }
-                },
-                y: {
-                    ticks: { color: '#d1d5db', font: { family: "'Heebo', sans-serif" } },
-                    grid: { display: false }
-                }
-            },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: { title: tooltipTitleCallback },
-                    bodyFont: { family: "'Heebo', sans-serif" },
-                    titleFont: { family: "'Heebo', sans-serif" }
-                }
-            }
-        }
-    });
 
-    // Chart 2: Recovery Curve
-    const recoveryCurveCtx = document.getElementById('recoveryCurveChart').getContext('2d');
-    new Chart(recoveryCurveCtx, {
-        type: 'line',
-        data: {
-            labels: ['שבוע 1', 'חודש 1', 'חודש 2', 'חודש 3', '90+ יום'],
-            datasets: [{
-                label: 'עוצמת התשוקה (Cravings)',
-                data: [90, 70, 40, 20, 10],
-                borderColor: '#f97316',
-                backgroundColor: 'rgba(249, 115, 22, 0.2)',
-                fill: true,
-                tension: 0.4
-            }, {
-                label: 'שליטה עצמית וחוסן',
-                data: [10, 30, 60, 80, 95],
-                borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: { color: '#9ca3af' },
-                    grid: { color: 'rgba(156, 163, 175, 0.1)' }
-                },
-                x: {
-                    ticks: { color: '#9ca3af' },
-                    grid: { color: 'rgba(156, 163, 175, 0.1)' }
-                }
+        // --- Upgrade Chart (Radar) ---
+        const upgradeCtx = document.getElementById('upgradeChart').getContext('2d');
+        const upgradeChart = new Chart(upgradeCtx, {
+            type: 'radar',
+            data: {
+                labels: ['בהירות קוגניטיבית', ['חוסן רגשי', '& ניהול לחצים'], ['דחף ומיקוד', 'במטרות'], 'חיבור חברתי', 'בריאות מינית'],
+                datasets: [{
+                    label: 'מערכת פגועה',
+                    data: [3, 2, 2, 4, 1],
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                    borderColor: '#2563eb',
+                    pointBackgroundColor: '#2563eb'
+                }, {
+                    label: 'מערכת משודרגת',
+                    data: [3, 2, 2, 4, 1], // Start with same data
+                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                    borderColor: '#f59e0b',
+                    pointBackgroundColor: '#f59e0b'
+                }]
             },
-            plugins: {
-                legend: { labels: { color: '#d1d5db', font: { family: "'Heebo', sans-serif" } } },
-                tooltip: {
-                    callbacks: { title: tooltipTitleCallback },
-                    bodyFont: { family: "'Heebo', sans-serif" },
-                    titleFont: { family: "'Heebo', sans-serif" }
+            options: { ...defaultChartOptions,
+                scales: {
+                    r: {
+                        angleLines: { color: '#374151' },
+                        grid: { color: '#374151' },
+                        pointLabels: { color: '#f9fafb', font: { size: 12 } },
+                        ticks: { display: false, stepSize: 2 },
+                        min: 0,
+                        max: 10
+                    }
                 }
             }
-        }
+        });
+        
+        // --- Animate Radar Chart on Scroll ---
+        gsap.to(upgradeChart.data.datasets[1].data, {
+            ...{0:9, 1:8, 2:9, 3:8, 4:8}, // Target values
+            duration: 1.5,
+            ease: "power3.inOut",
+            scrollTrigger: {
+                trigger: "#upgrade-section",
+                start: "top 50%",
+                onEnter: () => upgradeChart.update(),
+                onEnterBack: () => upgradeChart.update(), // Optional: re-animate when scrolling back
+            },
+            onUpdate: () => upgradeChart.update()
+        });
+
     });
 </script>
 
